@@ -17,7 +17,7 @@ function MapComp({center, zoom, height, geolocate, searchPlaces, marginClass, pa
     const _zoom = zoom || "3";
     const leafletMap = useRef(null);
     let LayersGroups = null;
-    let map = null;
+    let map = L.map('map').setView([0, 0], 3);;
 
     const addMarkertoMap = (latlng, draggable, textLocate) => {
         LayersGroups.clearLayers();
