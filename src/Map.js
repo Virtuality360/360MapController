@@ -5,6 +5,8 @@ import React, { useEffect, useRef } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { createControlComponent } from '@react-leaflet/core'
 import { Control } from 'leaflet'
+import UIButton from "./UIButton";
+import switchComponent from "./App"
 
 import "leaflet/dist/leaflet.css";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
@@ -18,6 +20,11 @@ function MapComp({}) {
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+          />
+          <UIButton
+            title={"Switch"}
+            component="PanoViewer"
+            position="topleft"
           />
         </MapContainer>
     );
