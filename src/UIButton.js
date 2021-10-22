@@ -14,7 +14,7 @@ class UIButton extends React.Component {
         helpDiv.innerHTML = this.props.title;
 
         helpDiv.addEventListener("click", () => {
-          switchComponent(this.props.component)
+          this.props.toggleMap("Pano");
         });
 
         return helpDiv;

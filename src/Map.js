@@ -6,7 +6,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { createControlComponent } from '@react-leaflet/core'
 import { Control } from 'leaflet'
 import UIButton from "./UIButton";
-import switchComponent from "./App"
 
 import "leaflet/dist/leaflet.css";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
@@ -14,7 +13,7 @@ import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css";
 import "leaflet/dist/leaflet.js";
 import "esri-leaflet-geocoder/dist/esri-leaflet-geocoder.js";
 
-function MapComp({}) {
+function MapComp(props) {
     return (
         <MapContainer center={[0, 0]} zoom={3} scrollWheelZoom={false} style={{ height: "100vh", width: "100wh" }}>
           <TileLayer
@@ -25,6 +24,7 @@ function MapComp({}) {
             title={"Switch"}
             component="PanoViewer"
             position="topleft"
+            toggleMap={props.toggleMap}
           />
         </MapContainer>
     );

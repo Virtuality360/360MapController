@@ -12,27 +12,28 @@ class Controller extends React.Component
         this.state = { currentComponent: 'Map' };
     }
 
-switchComponent(currentComponent)
-{
-    this.setState({currentComponent});
-};
+    switchComponent(currentComponent)
+    {
+       //this.setState({currentComponent: currentComponent});
+       this.state = currentComponent;
+    };
 
-render(){
-  return (
-    <div>
-        <div>
-         {
-            this.state.currentComponent === 'Map' &&
-            <MapComp />
-         }
-         {
-            this.state.currentComponent === 'PanoViewer' &&
-            <PannellumReact />
-         }
-        </div>
-    </div>
-    );
-  }
+    render(){
+        return (
+            <div>
+                <div>
+                 {
+                    this.state.currentComponent === 'Map' &&
+                    <MapComp toggleMap={this.switchComponent}/>
+                 }
+                 {
+                    this.state.currentComponent === 'PanoViewer' &&
+                    <PannellumReact toggleMap={this.switchComponent}/>
+                 }
+                </div>
+            </div>
+        );
+    }
 }
 
 function App() {
