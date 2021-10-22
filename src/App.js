@@ -14,8 +14,9 @@ class Controller extends React.Component
 
 switchComponent(currentComponent)
 {
-    this.setState({currentComponent});
+    this.setState({currentComponent: currentComponent});
 };
+
 
 render(){
   return (
@@ -23,11 +24,11 @@ render(){
         <div>
          {
             this.state.currentComponent === 'Map' &&
-            <MapComp />
+            <MapComp toggleMap={this.switchComponent}/>
          }
          {
             this.state.currentComponent === 'PanoViewer' &&
-            <PannellumReact />
+            <PannellumReact toggleMap={this.switchComponent}/>
          }
         </div>
     </div>
