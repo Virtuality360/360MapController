@@ -5,6 +5,11 @@ import switchComponent from "./App"
 
 class UIButton extends React.Component {
   helpDiv;
+   constructor(props)
+    {
+        super(props);
+        this.toggleMap = props.toggleMap;
+    }
 
   createButtonControl() {
     const MapHelp = L.Control.extend({
@@ -14,7 +19,8 @@ class UIButton extends React.Component {
         helpDiv.innerHTML = this.props.title;
 
         helpDiv.addEventListener("click", () => {
-          switchComponent(this.props.component)
+          //switchComponent(this.props.component)
+          this.toggleMap("Pano");
         });
 
         return helpDiv;
