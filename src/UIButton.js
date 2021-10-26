@@ -17,6 +17,7 @@ class UIButton extends React.Component {
 
         function handleClick()
         {
+          getMapCenter(map);
           self.props.toggleMap("PanoViewer");
         }
 
@@ -43,11 +44,20 @@ class UIButton extends React.Component {
   }
 }
 
-function withMap(Component) {
-  return function WrappedComponent(props) {
+function withMap(Component) 
+{
+  return function WrappedComponent(props) 
+  {
     const map = useMap();
     return <Component {...props} map={map} />;
   };
 }
+
+function getMapCenter(map) 
+{
+  console.log('map center:', map.getCenter())
+  return null
+}
+
 
 export default withMap(UIButton);
