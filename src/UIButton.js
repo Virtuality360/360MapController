@@ -13,9 +13,14 @@ class UIButton extends React.Component {
         this.helpDiv = helpDiv;
         helpDiv.innerHTML = this.props.title;
 
-        helpDiv.addEventListener("click", () => {
-          this.props.toggleMap("Pano");
-        });
+        let self = this;
+
+        function handleClick()
+        {
+          self.props.toggleMap("PanoViewer");
+        }
+
+        helpDiv.addEventListener("click", handleClick);
 
         return helpDiv;
       }

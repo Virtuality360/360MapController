@@ -12,13 +12,13 @@ class Controller extends React.Component
         this.state = { currentComponent: 'Map' };
     }
 
-    switchComponent(currentComponent)
+    switchComponent = (currentComponent) =>
     {
-       //this.setState({currentComponent: currentComponent});
-       this.state = currentComponent;
+        this.setState({currentComponent: currentComponent});
     };
 
-    render(){
+    render()
+    {
         return (
             <div>
                 <div>
@@ -36,12 +36,4 @@ class Controller extends React.Component
     }
 }
 
-function App() {
-  return (
-    <div className="App">
-      <MapComp />
-    </div>
-  );
-}
-
-export default App;
+export default Controller;
