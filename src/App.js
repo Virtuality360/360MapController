@@ -1,6 +1,4 @@
 import React from 'react';
-//import { Pannellum } from "pannellum-react";
-//import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import PannellumReact from './PannellumReact.js'
 import MapComp from './Map.js'
 
