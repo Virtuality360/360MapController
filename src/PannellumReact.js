@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
  
 import { Pannellum } from "pannellum-react";
-import image1 from "./images/Cairo/GSAA2264.jpeg";
+//import image1 from "./images/Cairo/GSAA2264.jpeg";
 
 import images from "./images.js";
 
