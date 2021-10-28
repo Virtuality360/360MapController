@@ -11,11 +11,11 @@ import images from "./images.js";
 //let Images = require('json-loader!./CairoPanoConfig.json');
 
 const loadImages = images =>
-  promise.all(entries.amp((entry) => import('./images/Cairo/${entry}.jpeg')));
+  promise.all(entries.amp((entry) => import('./images/Cairo/'${entry}'.jpeg')));
 
 const PannellumReact = (props) => (
-  loadImages(images[].key)
-    .then((entries) => console.log(entries));
+  loadImages(images.key)
+    .then((entries) => console.log(entries)),
 
   <div>
     <Pannellum
