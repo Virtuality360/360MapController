@@ -3,22 +3,12 @@ import { render } from 'react-dom';
  
 import { Pannellum } from "pannellum-react";
 import image1 from "./images/Cairo/GSAA2264.jpeg";
+
+import images from "./images.js";
+
 //import Images from "json-loader!./CairoPanoConfig.json";
 
 //let Images = require('json-loader!./CairoPanoConfig.json');
-
-const images = 
- [
-  {
-    src: "./images/Cairo/GSAA2264.jpeg",
-  },
-  {
-    src: "./images/Cairo/GSAA2265.jpeg",
-  },
-  {
-    src: "./public/images/Cairo/GSAA2266.jpeg",
-  }
-]
 
 const PannellumReact = (props) => (
   console.log("images"),
@@ -28,13 +18,11 @@ const PannellumReact = (props) => (
   console.log("images0src"),
   console.log(images[0].src),
 
-  import imageConst1 from images[0].src,
-
   <div>
     <Pannellum
         width="100%"
         height="1000px"
-        image={imageConst1}
+        image={images[0].src}
         pitch={10}
         yaw={180}
         hfov={110}
