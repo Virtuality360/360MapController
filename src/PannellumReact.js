@@ -16,13 +16,13 @@ const PannellumReact = (props) => (
   console.log("images0"),
   console.log(images[0]),
   console.log("images0src"),
-  console.log(images[0].src),
+  console.log(images[0].image),
 
   <div>
     <Pannellum
         width="100%"
         height="1000px"
-        image={images[0].src}
+        image={images[0].image}
         pitch={10}
         yaw={180}
         hfov={110}
