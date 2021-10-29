@@ -1,3 +1,16 @@
 {
-  imageSrc": "./images/Cairo/GSAA2264.jpeg"
+  "Images": [
+    {
+      "ImageName": "GSAA2264",
+      "ImageSrc": "./images/Cairo/GSAA2264.jpeg"
+    },
+    {
+      "ImageName": "GSAA2265",
+      "ImageSrc": "./images/Cairo/GSAA2265.jpeg"
+    },
+    {
+      "ImageName": "GSAA2266",
+      "ImageSrc": "./images/Cairo/GSAA2266.jpeg"
+    }
+  ]
 }

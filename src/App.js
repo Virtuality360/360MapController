@@ -1,6 +1,6 @@
-import React from 'react';
-import PannellumReact from './PannellumReact.js'
-import MapComp from './Map.js'
+import React, {Button} from 'react';
+import PannellumReact from './PannellumReact'
+import MapComp from './Map'
 
 class Controller extends React.Component 
 {
