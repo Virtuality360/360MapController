@@ -1,6 +1,7 @@
 import React, {Button} from 'react';
 import PannellumReact from './PannellumReact'
 import MapComp from './Map'
+import ControllerButton from './PanoButton.js'
 
 class Controller extends React.Component 
 {
@@ -26,7 +27,8 @@ class Controller extends React.Component
                  }
                  {
                     this.state.currentComponent === 'PanoViewer' &&
-                    <PannellumReact toggleMap={this.switchComponent}/>
+                    <ControllerButton toggleMap={this.switchComponent}/>
+                    
                  }
                 </div>
             </div>
