@@ -18,6 +18,11 @@ class PannellumReact extends React.Component
     console.log(this.state.id)
   }; 
 
+  useEffect()
+  {
+      let imageEffect = Images[this.state.id].ImageSrc
+  };
+
   hanldeClickImage(evt, args)
   {
     console.log(args.name);
@@ -34,7 +39,7 @@ class PannellumReact extends React.Component
         <Pannellum
             width="100%"
             height="1000px"
-            image={Images[this.state.id].ImageSrc}
+            image={this.imageEffect}
             pitch={10}
             yaw={180}
             hfov={110}
@@ -45,8 +50,8 @@ class PannellumReact extends React.Component
         >
         <Pannellum.Hotspot
           type="custom"
-          pitch={31}
-          yaw={150}
+          pitch={0}
+          yaw={0}
           handleClick={(evt, args) => this.hanldeClickImage(evt, args)}
         />
         </Pannellum>
