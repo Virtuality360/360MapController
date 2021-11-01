@@ -13,26 +13,28 @@ class PannellumReact extends React.Component
 
   handleClick()
   {
-    this.setState({id: (this.id + 1)});
+    this.setState({id: (this.state.id + 1)});
     console.log("handledClick")
-    console.log(this.id)
+    console.log(this.state.id)
   }; 
 
   hanldeClickImage(evt, args)
   {
     console.log(args.name);
     console.log("handleClickImage")
-    console.log(this.id)
+    console.log(this.state.id)
     this.setState({id: (this.id + 1)});
   };
 
   render() {
+    console.log(this.state.id);
+
     return(
       <div>
         <Pannellum
             width="100%"
             height="1000px"
-            image={Images[this.id].ImageSrc}
+            image={Images[this.state.id].ImageSrc}
             pitch={10}
             yaw={180}
             hfov={110}
