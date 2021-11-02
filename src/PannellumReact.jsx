@@ -6,19 +6,26 @@ import { Images } from "./CairoPanoConfig.json";
 function PannellumReact(props)
 {
   const [id, setId] = React.useState(0);
+  const [yaw, setYaw] = React.useState(180);
+  const [pitch, setPitch] = React.useState(10);
 
-  function handleClickHotspotForward(evt, args)
+  function handleClickHotspot(evt, args, change)
   {
-    console.log("Forward Button Clicked");
+    console.log("Change Pano Button Clicked");
     console.log(id);
-    setId(id + 1);
-  };
 
-  function handleClickHotspotBackward(evt, args)
-  {
-    console.log("Backward Button Clicked");
-    console.log(id);
-    setId(id - 1);
+    if(change > 0)
+    {
+      setYaw(180);
+      setPitch(10);
+    }
+    else
+    {
+      setYaw(0);
+      setPitch(10);
+    }
+
+    setId(id + change);
   };
 
   return(
@@ -27,8 +34,8 @@ function PannellumReact(props)
         width="100%"
         height="1100px"
         image={Images[id].ImageSrc}
-        pitch={10}
-        yaw={180}
+        pitch={pitch}
+        yaw={yaw}
         hfov={110}
         autoLoad
         onLoad={() => {
@@ -39,13 +46,13 @@ function PannellumReact(props)
           type="custom"
           pitch={0}
           yaw={180}
-          handleClick={(evt, args) => handleClickHotspotForward(evt, args)}
+          handleClick={(evt, args) => handleClickHotspot(evt, args, 1)}
         />
         <Pannellum.Hotspot
           type="custom"
-          pitch={0}
-          yaw={0}
-          handleClick={(evt, args) => handleClickHotspotBackward(evt, args)}
+          pitch={-5}
+          yaw={-5}
+          handleClick={(evt, args) => handleClickHotspot(evt, args, -1)}
         />
       </Pannellum>
     </div>
