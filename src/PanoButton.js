@@ -12,8 +12,8 @@ class ControllerButton extends React.Component {
     render() {
         return ( 
         	<div>
-        		<div>
-	            	<button onClick = {this.handleClick} position= 'absolute' top= "40px" >
+        		<div style = {{position: 'absolute', top: '95px', left: '5px', zIndex: '1'}}>
+	            	<button onClick = {this.handleClick}>
 	            		Switch 
 	            	</button> 
 	            </div>

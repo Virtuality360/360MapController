@@ -3,62 +3,45 @@ import { render } from 'react-dom';
 import { Pannellum } from "pannellum-react";
 import { Images } from "./CairoPanoConfig.json";
 
-class PannellumReact extends React.Component
+function PannellumReact(props)
 {
-  constructor(props)
-  {
-    super(props);
-    this.state = { id: 0 };
-  }
+  const [id, setId] = React.useState(0);
 
-  handleClick()
+  function useEffect()
   {
-    this.setState({id: (this.state.id + 1)});
-    console.log("handledClick")
-    console.log(this.state.id)
-  }; 
-
-  useEffect()
-  {
-      let imageEffect = Images[this.state.id].ImageSrc
+      console.log(`${Images[this.state.id].ImageSrc}`);
   };
 
-  hanldeClickImage(evt, args)
+  function handleClickHotspot(evt, args)
   {
     console.log(args.name);
-    console.log("handleClickImage")
-    console.log(this.state.id)
-    this.setState({id: (this.id + 1)});
+    console.log(id);
+    setId(id + 1);
   };
 
-  render() {
-    console.log(this.state.id);
-
-    return(
-      <div>
-        <Pannellum
-            width="100%"
-            height="1000px"
-            image={this.imageEffect}
-            pitch={10}
-            yaw={180}
-            hfov={110}
-            autoLoad
-            onLoad={() => {
-                console.log("panorama loaded");
-            }}
-        >
+  return(
+    <div>
+      <Pannellum
+        width="100%"
+        height="1100px"
+        image={Images[id].ImageSrc}
+        pitch={10}
+        yaw={180}
+        hfov={110}
+        autoLoad
+        onLoad={() => {
+          console.log("panorama loaded");
+        }}
+      >
         <Pannellum.Hotspot
           type="custom"
           pitch={0}
-          yaw={0}
-          handleClick={(evt, args) => this.hanldeClickImage(evt, args)}
+          yaw={180}
+          handleClick={(evt, args) => handleClickHotspot(evt, args)}
         />
-        </Pannellum>
-
-      </div>
-    )
-  }
+      </Pannellum>
+    </div>
+  )
 }
 
 export default PannellumReact;
