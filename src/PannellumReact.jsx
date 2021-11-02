@@ -7,16 +7,18 @@ function PannellumReact(props)
 {
   const [id, setId] = React.useState(0);
 
-  function useEffect()
+  function handleClickHotspotForward(evt, args)
   {
-      console.log(`${Images[this.state.id].ImageSrc}`);
-  };
-
-  function handleClickHotspot(evt, args)
-  {
-    console.log(args.name);
+    console.log("Forward Button Clicked");
     console.log(id);
     setId(id + 1);
+  };
+
+  function handleClickHotspotBackward(evt, args)
+  {
+    console.log("Backward Button Clicked");
+    console.log(id);
+    setId(id - 1);
   };
 
   return(
@@ -37,7 +39,13 @@ function PannellumReact(props)
           type="custom"
           pitch={0}
           yaw={180}
-          handleClick={(evt, args) => handleClickHotspot(evt, args)}
+          handleClick={(evt, args) => handleClickHotspotForward(evt, args)}
+        />
+        <Pannellum.Hotspot
+          type="custom"
+          pitch={0}
+          yaw={0}
+          handleClick={(evt, args) => handleClickHotspotBackward(evt, args)}
         />
       </Pannellum>
     </div>
