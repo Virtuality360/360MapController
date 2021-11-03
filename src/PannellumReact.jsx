@@ -1,31 +1,48 @@
-import React, { Component, Button } from 'react';
+import React, { Component, Button, useState, useRef } from 'react';
 import { render } from 'react-dom';
 import { Pannellum } from "pannellum-react";
 import { Images } from "./CairoPanoConfig.json";
+import * as _ from 'underscore';
 
 function PannellumReact(props)
 {
-  const [id, setId] = React.useState(0);
-  const [yaw, setYaw] = React.useState(180);
-  const [pitch, setPitch] = React.useState(10);
+  const [id, setId] = useState("GSAA2264");
+  const [yaw, setYaw] = useState(180);
+  const [pitch, setPitch] = useState(0);
 
-  function handleClickHotspot(evt, args, change)
+  function getJSONIndex()
   {
-    console.log("Change Pano Button Clicked");
-    console.log(id);
-
-    if(change > 0)
+    for (var i = 0; i < Images.length; i++) 
     {
-      setYaw(180);
-      setPitch(10);
+      if(id === Images[i].ImageName)
+      {
+        return i;
+      }
     }
-    else
-    {
-      setYaw(0);
-      setPitch(10);
-    }
+    return null;
+  }
 
-    setId(id + change);
+  function renderHotspots()
+  {
+    let info: Array<Array<any>> = [];
+    for (var i = 0; i < Images.length; i++) 
+    {
+      if(id === Images[i].ImageName)
+      {
+        info.push(Images[i].Hotspots);
+      }
+    }
+    console.log(info);
+
+    return info;
+  };
+
+  function handleClickHotspot(path, pitch, yaw)
+  {
+    setYaw(yaw);
+    setPitch(pitch);
+
+    setId(path);
   };
 
   return(
@@ -33,7 +50,7 @@ function PannellumReact(props)
       <Pannellum
         width="100%"
         height="1100px"
-        image={Images[id].ImageSrc}
+        image={Images[getJSONIndex()].ImageSrc}
         pitch={pitch}
         yaw={yaw}
         hfov={110}
@@ -42,18 +59,20 @@ function PannellumReact(props)
           console.log("panorama loaded");
         }}
       >
-        <Pannellum.Hotspot
-          type="custom"
-          pitch={0}
-          yaw={180}
-          handleClick={(evt, args) => handleClickHotspot(evt, args, 1)}
-        />
-        <Pannellum.Hotspot
-          type="custom"
-          pitch={-5}
-          yaw={-5}
-          handleClick={(evt, args) => handleClickHotspot(evt, args, -1)}
-        />
+        {renderHotspots().length > 0 &&
+          renderHotspots().map((value, index) => {
+            console.log(index);
+
+            return (
+              <Pannellum.Hotspot
+                type="custom"
+                pitch={value[0].Pitch}
+                yaw={value[0].Yaw}
+                key={index}
+                handleClick={() => handleClickHotspot(value[0].Path, value[0].Pitch, value[0].Yaw)}
+              />
+            );
+         })}
       </Pannellum>
     </div>
   )

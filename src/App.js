@@ -11,7 +11,7 @@ class Controller extends React.Component
         this.state = { currentComponent: 'Map' };
     }
 
-    switchComponent = (currentComponent) =>
+    switchComponent = (currentComponent, array) =>
     {
         this.setState({currentComponent: currentComponent});
     };
@@ -28,7 +28,6 @@ class Controller extends React.Component
                  {
                     this.state.currentComponent === 'PanoViewer' &&
                     <ControllerButton toggleMap={this.switchComponent}/>
-                    
                  }
                 </div>
             </div>
