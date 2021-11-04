@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { Pannellum } from "pannellum-react";
 import { Images } from "./CairoPanoConfig.json";
 import * as _ from 'underscore';
+import * as shortid from 'shortid';
+import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
 function PannellumReact(props)
 {
@@ -41,16 +43,39 @@ function PannellumReact(props)
   {
     setYaw(yaw);
     setPitch(pitch);
-
     setId(path);
   };
+
+  let hotspots = [];
+  const {ImageSrc, Hotspots} = Images[getJSONIndex()];
+
+  for(const {Pitch, Yaw, Path} of Hotspots)
+  {
+    hotspots.push(
+      /*<Pannellum.Hotspot
+        type="custom"
+        pitch={Pitch}
+        yaw={Yaw}
+        key={shortid.generate()}
+        handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
+      />*/
+      
+      <CustomPannellumHotspot
+        type="custom"
+        pitch={Pitch}
+        yaw={Yaw}
+        handleClick ={() => handleClickHotspot(Path, Pitch, Yaw)}
+        //handleClick = {_.bind(handleClickHotspot, this)}
+      />
+    )
+  }
 
   return(
     <div>
       <Pannellum
         width="100%"
         height="1100px"
-        image={Images[getJSONIndex()].ImageSrc}
+        image={ImageSrc}
         pitch={pitch}
         yaw={yaw}
         hfov={110}
@@ -59,20 +84,7 @@ function PannellumReact(props)
           console.log("panorama loaded");
         }}
       >
-        {renderHotspots().length > 0 &&
-          renderHotspots().map((value, index) => {
-            console.log(index);
-
-            return (
-              <Pannellum.Hotspot
-                type="custom"
-                pitch={value[0].Pitch}
-                yaw={value[0].Yaw}
-                key={index}
-                handleClick={() => handleClickHotspot(value[0].Path, value[0].Pitch, value[0].Yaw)}
-              />
-            );
-         })}
+        {hotspots}
       </Pannellum>
     </div>
   )
