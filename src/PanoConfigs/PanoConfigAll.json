@@ -1,0 +1,98 @@
+{
+  "Images": [
+    {
+      "ImageId": "GSAA2264",
+      "ImageSrc": "./images/Cairo/GSAA2264.jpeg",
+      "Latitude":  30.075663,
+      "Longitude": 31.212037,
+      "Altitude": 31.05,
+      "Hotspots": [
+        {
+          "Path": "GSAA2265",
+          "Yaw":180,
+          "Pitch":0
+        }
+      ]
+    },
+    {
+      "ImageId": "GSAA2265",
+      "ImageSrc": "./images/Cairo/GSAA2265.jpeg",
+      "Latitude":  30.075606,
+      "Longitude": 31.211989,
+      "Altitude": 31.053,
+      "Hotspots": [
+        {
+          "Path": "GSAA2266",
+          "Yaw":180,
+          "Pitch":0
+        },
+        {
+          "Path": "GSAA2264",
+          "Yaw":-5,
+          "Pitch":-5
+        }
+      ]
+    },
+    {
+      "ImageId": "GSAA2266",
+      "ImageSrc": "./images/Cairo/GSAA2266.jpeg",
+      "Latitude":  30.075526,
+      "Longitude": 31.211926,
+      "Altitude": 31.27,
+      "Hotspots": [
+        {
+          "Path": "GSAA2265",
+          "Yaw":-5,
+          "Pitch":-5
+        }
+      ]
+    },
+    {
+      "ImageId": "GSAB0289",
+      "ImageSrc": "./images/Argentina/GSAB0289.jpeg",
+      "Latitude":  -34.621528,
+      "Longitude": -58.360074,
+      "Altitude": 31.05,
+      "Hotspots": [
+        {
+          "Path": "GSAB0290",
+          "Yaw":270,
+          "Pitch":0
+        }
+      ]
+    },
+    {
+      "ImageId": "GSAB0290",
+      "ImageSrc": "./images/Argentina/GSAB0290.jpeg",
+      "Latitude":  -34.621528,
+      "Longitude": -58.360075,
+      "Altitude": 21.838,
+      "Hotspots": [
+        {
+          "Path": "GSAB0291",
+          "Yaw":270,
+          "Pitch":0
+        },
+        {
+          "Path": "GSAB0289",
+          "Yaw":90,
+          "Pitch":-5
+        }
+      ]
+    },
+    {
+      "ImageId": "GSAB0291",
+      "ImageSrc": "./images/Argentina/GSAB0291.jpeg",
+      "Latitude":  -34.621541,
+      "Longitude": -58.360086,
+      "Altitude": 22.109,
+      "Hotspots": [
+        {
+          "Path": "GSAB0290",
+          "Yaw":90,
+          "Pitch":-5
+        }
+      ]
+    }
+  ]
+}
