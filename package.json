@@ -14,6 +14,8 @@
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.2",
     "react-scripts": "4.0.3",
+    "shortid": "^2.2.16",
+    "underscore": "^1.13.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -32,5 +34,8 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "json-loader": "^0.5.7"
+  }
 }

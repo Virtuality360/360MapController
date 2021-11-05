@@ -1,39 +1,38 @@
-import React from 'react';
-//import { Pannellum } from "pannellum-react";
-//import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import PannellumReact from './PannellumReact.js'
-import MapComp from './Map.js'
+import React, { Button, useState } from 'react';
+import PannellumReact from './PannellumReact'
+import MapComp from './Map'
+import ControllerButton from './PanoButton.js'
 
-class Controller extends React.Component 
+function Controller()
 {
-    constructor(props)
-    {
-        super(props);
-        this.state = { currentComponent: 'Map' };
-    }
+    const [currentComponent, setCurrentComponent] = useState("Map");
+    const [latLong, setLatLong] = useState([0,0]);
 
-    switchComponent = (currentComponent) =>
+    function switchComponent(currentComponent, array)
     {
-        this.setState({currentComponent: currentComponent});
+        setLatLong(array);
+        setCurrentComponent(currentComponent);
     };
 
-    render()
-    {
-        return (
+    return (
+        <div>
             <div>
-                <div>
-                 {
-                    this.state.currentComponent === 'Map' &&
-                    <MapComp toggleMap={this.switchComponent}/>
-                 }
-                 {
-                    this.state.currentComponent === 'PanoViewer' &&
-                    <PannellumReact toggleMap={this.switchComponent}/>
-                 }
-                </div>
+             {
+                currentComponent === 'Map' &&
+                <MapComp 
+                    toggleMap={switchComponent}
+                />
+             }
+             {
+                currentComponent === 'PanoViewer' &&
+                <ControllerButton 
+                    toggleMap={switchComponent} 
+                    latLong = {latLong}
+                />
+             }
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Controller;
