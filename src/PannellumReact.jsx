@@ -90,7 +90,7 @@ function PannellumReact(props)
     <div>
       <Pannellum
         width="100%"
-        height="1100px"
+        height="1000px"
         image={ImageSrc}
         pitch={pitch}
         yaw={yaw}

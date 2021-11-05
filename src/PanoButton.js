@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import PannellumReact from './PannellumReact'
 import switchComponent from "./App"
 
-function ControllerButton
+function ControllerButton(props)
 {
     function handleClick()
 	{
@@ -13,13 +13,13 @@ function ControllerButton
     return ( 
     	<div>
     		<div style = {{position: 'absolute', top: '95px', left: '5px', zIndex: '1'}}>
-            	<button onClick = {this.handleClick}>
+            	<button onClick = {handleClick}>
             		Switch 
             	</button> 
             </div>
             <div>
             	<PannellumReact 
-            		latLong = {this.props.latLong}
+            		latLong = {props.latLong}
             	/>
             </div>
         </div>
