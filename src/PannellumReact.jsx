@@ -8,33 +8,49 @@ import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
 function PannellumReact(props)
 {
-  const [id, setId] = useState("GSAA2264");
+  function loadLatLong()
+  {
+    for (var i = 0; i < Images.length; i++) 
+    {
+      if(props.latLong[0] === Images[i].Latitude)
+      {
+        if(props.latLong[1] === Images[i].Longitude)
+        {
+          return Images[i].ImageId;
+        }
+      }
+    }
+    return null;
+  };
+
+  const [id, setId] = useState(loadLatLong());
   const [yaw, setYaw] = useState(180);
   const [pitch, setPitch] = useState(0);
+
+  
 
   function getJSONIndex()
   {
     for (var i = 0; i < Images.length; i++) 
     {
-      if(id === Images[i].ImageName)
+      if(id === Images[i].ImageId)
       {
         return i;
       }
     }
     return null;
-  }
+  };
 
   function renderHotspots()
   {
     let info: Array<Array<any>> = [];
     for (var i = 0; i < Images.length; i++) 
     {
-      if(id === Images[i].ImageName)
+      if(id === Images[i].ImageId)
       {
         info.push(Images[i].Hotspots);
       }
     }
-    console.log(info);
 
     return info;
   };

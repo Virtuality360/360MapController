@@ -5,7 +5,6 @@ import switchComponent from "./App"
 class ControllerButton extends React.Component {
     handleClick = () => {
         let self = this;
-        console.log("test button clicked");
         self.props.toggleMap("Map");
     }
 
@@ -18,7 +17,9 @@ class ControllerButton extends React.Component {
 	            	</button> 
 	            </div>
 	            <div>
-	            	<PannellumReact />
+	            	<PannellumReact 
+	            		latLong = {this.props.latLong}
+	            	/>
 	            </div>
             </div>
         );

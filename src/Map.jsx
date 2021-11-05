@@ -23,7 +23,6 @@ function MapComp(props)
       temp.push(Images[i].Latitude, Images[i].Longitude);
       latLong.push(temp);
     }
-    console.log(latLong);
 
     return latLong;
   };
@@ -38,7 +37,7 @@ function MapComp(props)
       renderMarkers().map((value, index) => {
         return (
           <CircleMarker center={[value[0], value[1]]} key={index} eventHandlers={{
-            click: () => {props.toggleMap("PanoViewer", [[value[0], value[1]]])}}}>
+            click: () => {props.toggleMap("PanoViewer", [value[0], value[1]])}}}>
           </CircleMarker>
         );
      })}
