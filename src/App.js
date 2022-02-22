@@ -1,38 +1,38 @@
-import React, { Button, useState } from 'react';
-import PannellumReact from './PannellumReact'
-import MapComp from './Map'
-import ControllerButton from './PanoButton.js'
+import React, { useState } from "react";
+import MapComp from "./Map.jsx";
+import ControllerButton from "./PanoButton.js";
 
-function Controller()
-{
-    const [currentComponent, setCurrentComponent] = useState("Map");
-    const [latLong, setLatLong] = useState([0,0]);
+const MapPanoController = () => {
+  const [currentComponent, setCurrentComponent] = useState("Map");
+  const [latLong, setLatLong] = useState([0, 0]);
+  const [zoomLevel, setZoomLevel] = useState(3);
 
-    function switchComponent(currentComponent, array)
-    {
-        setLatLong(array);
-        setCurrentComponent(currentComponent);
-    };
+  function switchComponent(currentComponent, latLong, zoomLevel) {
+    setLatLong(latLong);
+    setZoomLevel(zoomLevel);
+    setCurrentComponent(currentComponent);
+  }
 
-    return (
-        <div>
-            <div>
-             {
-                currentComponent === 'Map' &&
-                <MapComp 
-                    toggleMap={switchComponent}
-                />
-             }
-             {
-                currentComponent === 'PanoViewer' &&
-                <ControllerButton 
-                    toggleMap={switchComponent} 
-                    latLong = {latLong}
-                />
-             }
-            </div>
-        </div>
-    );
-}
+  return (
+    <div className="pano-container">
+      <div className="pano-map">
+        {currentComponent === "Map" && (
+          <MapComp
+            toggleMap={switchComponent}
+            latLong={latLong}
+            zoom={zoomLevel}
+          />
+        )}
+        {currentComponent === "PanoViewer" && (
+          <ControllerButton
+            toggleMap={switchComponent}
+            latLong={latLong}
+            zoom={zoomLevel}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 
-export default Controller;
+export default MapPanoController;
