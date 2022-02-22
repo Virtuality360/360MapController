@@ -1,20 +1,18 @@
-import React from 'react';
+import React from "react";
 import { Pannellum } from "pannellum-react";
-import * as shortid from 'shortid';
+import * as shortid from "shortid";
 
-function CustomPannellumHotspot({type, path, pitch, yaw, handleClick}: props) 
-{
-  return(
-     <Pannellum.Hotspot
-        type={type}
-        pitch={pitch}
-        yaw={yaw}
-        path={path}
-        key={shortid.generate()}
-        handleClick={handleClick}
-        
-      />
-  )
-}
+const CustomPannellumHotspot = (props) => {
+  return (
+    <Pannellum.Hotspot
+      type={props.type}
+      pitch={props.pitch}
+      yaw={props.yaw}
+      path={props.path}
+      key={shortid.generate()}
+      handleClick={props.handleClick}
+    />
+  );
+};
 
 export default CustomPannellumHotspot;
