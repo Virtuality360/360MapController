@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Pannellum } from "pannellum-react";
-import { Images } from "./PanoConfigs/ProcessedPanoJSONLarge.json";
+import { Images } from "./PanoConfigs/PanoConfig.json";
 import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
 const PannellumReact = (props) => {

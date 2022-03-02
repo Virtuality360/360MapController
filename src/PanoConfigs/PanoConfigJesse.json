@@ -1,0 +1,158 @@
+{
+  "Images": [
+    {
+      "ImageId": "Buenos Aires",
+      "ImageSrc": "./images/Buenos Aires/MicrosoftTeams-image (1).png",
+      "Latitude": -34.621541,
+      "Longitude": -58.360086,
+      "Altitude": 22.109
+    },
+    {
+      "CountryName": "Kenya",
+      "ImageId": "Nairobi",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": -1.2833333333333332,
+      "Longitude": 36.816667,
+      "CountryCode": "KE",
+      "ContinentName": "Africa"
+    },
+    {
+      "CountryName": "Mexico",
+      "ImageId": "Mexico City",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 19.433333333333334,
+      "Longitude": -99.133333,
+      "CountryCode": "MX",
+      "ContinentName": "Central America"
+    },
+    {
+      "CountryName": "India",
+      "ImageId": "New Delhi",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 28.6,
+      "Longitude": 77.2,
+      "CountryCode": "IN",
+      "ContinentName": "Asia"
+    },
+    {
+      "CountryName": "Vietnam",
+      "ImageId": "Hanoi",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 21.033333333333335,
+      "Longitude": 105.85,
+      "CountryCode": "VN",
+      "ContinentName": "Asia"
+    },
+    {
+      "CountryName": "Georgia",
+      "ImageId": "Tbilisi",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 41.68333333333333,
+      "Longitude": 44.833333,
+      "CountryCode": "GE",
+      "ContinentName": "Europe"
+    },
+    {
+      "CountryName": "Lebanon",
+      "ImageId": "Beirut",
+      "ImageSrc": "./images/Beirut/MicrosoftTeams-image (3).png",
+      "Latitude": 33.86666666666667,
+      "Longitude": 35.5,
+      "CountryCode": "LB",
+      "ContinentName": "Asia",
+      "Hotspots": [
+        {
+          "Path": "Beirut2",
+          "Yaw": 0,
+          "Pitch": 0
+        }
+      ]
+    },
+    {
+      "CountryName": "Lebanon",
+      "ImageId": "Beirut2",
+      "ImageSrc": "./images/Beirut/MicrosoftTeams-image (4).png",
+      "Latitude": 33.86666666666667,
+      "Longitude": 35.5,
+      "CountryCode": "LB",
+      "ContinentName": "Asia",
+      "Hotspots": [
+        {
+          "Path": "Beirut3",
+          "Yaw": 0,
+          "Pitch": 0
+        },
+        {
+          "Path": "Beirut",
+          "Yaw": 180,
+          "Pitch": -5
+        }
+      ]
+    },
+    {
+      "CountryName": "Lebanon",
+      "ImageId": "Beirut3",
+      "ImageSrc": "./images/Beirut/MicrosoftTeams-image (2).png",
+      "Latitude": 33.86666666666667,
+      "Longitude": 35.5,
+      "CountryCode": "LB",
+      "ContinentName": "Asia",
+      "Hotspots": [
+        {
+          "Path": "Beirut2",
+          "Yaw": 180,
+          "Pitch": -5
+        }
+      ]
+    },
+    {
+      "CountryName": "Philippines",
+      "ImageId": "Manila",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 14.6,
+      "Longitude": 120.966667,
+      "CountryCode": "PH",
+      "ContinentName": "Asia"
+    },
+    {
+      "CountryName": "Serbia",
+      "ImageId": "Belgrade",
+      "ImageSrc": "./images/Coming Soon.png",
+      "Latitude": 44.833333333333336,
+      "Longitude": 20.5,
+      "CountryCode": "RS",
+      "ContinentName": "Europe"
+    },
+    {
+      "CountryName": "Albania",
+      "ImageId": "Vlore",
+      "ImageSrc": "./images/Vlore/MicrosoftTeams-image.png",
+      "Latitude": 40.4661,
+      "Longitude": 19.4914
+    },
+    {
+      "country": "ZA",
+      "ImageId": "Pretoria",
+      "Latitude": -25.74486,
+      "Longitude": 28.18783
+    },
+    {
+      "country": "US",
+      "ImageId": "Philadelphia",
+      "Latitude": 32.77152,
+      "Longitude": -89.11673
+    },
+    {
+      "country": "US",
+      "ImageId": "Juneau",
+      "Latitude": 58.30194,
+      "Longitude": -134.41972
+    },
+    {
+      "country": "US",
+      "ImageId": "Miami",
+      "Latitude": 25.77427,
+      "Longitude": -80.19366
+    }
+  ]
+}
