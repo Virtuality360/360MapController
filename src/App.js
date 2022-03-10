@@ -14,8 +14,12 @@ const MapPanoController = () => {
   }
 
   return (
-    <div className="pano-container">
-      <div className="pano-map">
+    <div className="pano-container" style={{
+	    height:"100%"
+                }}>
+      <div className="pano-map" style={{
+	      height:"100%"
+                }}>
         {currentComponent === "Map" && (
           <MapComp
             toggleMap={switchComponent}

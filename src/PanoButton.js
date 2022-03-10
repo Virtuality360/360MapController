@@ -7,7 +7,9 @@ const ControllerButton = (props) => {
   }
 
   return (
-    <div>
+    <div style={{
+	    height:"100%"
+                }}>
       <div
         style={{
           position: "relative",
@@ -18,8 +20,10 @@ const ControllerButton = (props) => {
       >
         <button onClick={handleClick}>Map</button>
       </div>
-      <div>
-        <PannellumReact latLong={props.latLong} zoom={props.zoom} />
+        <div style={{
+		height:"100%"
+                }}>
+	 < PannellumReact latLong={props.latLong} zoom={props.zoom} />
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const MapComp = (props) => {
       zoom={zoomLevel}
       scrollWheelZoom={true}
       whenCreated={setMap}
-      style={{ height: "100vh", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

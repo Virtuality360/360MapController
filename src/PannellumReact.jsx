@@ -60,10 +60,9 @@ const PannellumReact = (props) => {
   }
 
   return (
-    <div>
       <Pannellum
         width="100%"
-        height="100vh"
+        height="100%"
         image={ImageSrc}
         pitch={pitch}
         yaw={yaw}
@@ -75,7 +74,6 @@ const PannellumReact = (props) => {
       >
         {hotspots}
       </Pannellum>
-    </div>
   );
 };
 
