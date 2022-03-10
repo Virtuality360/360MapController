@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, CircleMarker } from "react-leaflet";
-import { Images } from "./PanoConfigs/ProcessedPanoJSONLarge.json";
+import { Images } from "./PanoConfigs/PanoConfig.json";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
+import "./overrides.css";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
@@ -32,7 +33,7 @@ const MapComp = (props) => {
       zoom={zoomLevel}
       scrollWheelZoom={true}
       whenCreated={setMap}
-      style={{ height: "100vh", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
