@@ -6,6 +6,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
 import "../CSS/overrides.css";
+import * as CONSTS from "./Constants/MapOverlays";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
@@ -44,7 +45,7 @@ const MapComp = (props) => {
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+        url={CONSTS.mapOverlays['CartoDB World Antique']}
       />
       <MarkerClusterGroup
         spiderfyDistanceMultiplier={1}
