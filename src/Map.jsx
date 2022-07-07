@@ -5,6 +5,7 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
+import "./overrides.css";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
