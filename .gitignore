@@ -1,0 +1,7 @@
+node_modules/
+build/
+build.old/
+package-lock.json
+yarn.lock
+public/Images/
+assets/images/
