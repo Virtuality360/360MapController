@@ -1,5 +1,6 @@
 import React from "react";
 import { Pannellum } from "pannellum-react";
+import shortid from "shortid";
 
 const CustomPannellumHotspot = (props) => {
   return (
