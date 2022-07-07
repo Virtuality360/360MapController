@@ -1,19 +1,19 @@
-//removes locally stored packages
+#removes locally stored packages
 node_modules
 
-//removes old production builds
+#removes old production builds
 build.old
 
-//removes list of locally stored packages
+#removes list of locally stored packages
 package-lock.json
 yarn.lock
 
-//removes images from being stored in project
+#removes images from being stored in project
 public/Images/
 assets/images/
 
-//removes JSON script output leftovers
+#removes JSON script output leftovers
 Output_Files
 
-//removes Mac Specific Files
+#removes Mac Specific Files
 **/.DS_Store
