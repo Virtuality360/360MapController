@@ -1,0 +1,241 @@
+{
+  "Images": [
+    {
+      "ImageId": "aeea344c-0001.jpg",
+      "ImageSrc": "./Images/aeea344c-0001.jpg",
+      "Latitude": 55.66902683334656,
+      "Longitude": 37.76404310880952,
+      "Altitude": 127.1592242063492,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0002.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0002.jpg",
+      "ImageSrc": "./Images/aeea344c-0002.jpg",
+      "Latitude": 55.66910046746031,
+      "Longitude": 37.76408948492063,
+      "Altitude": 127.24711904761904,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0003.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0001.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0003.jpg",
+      "ImageSrc": "./Images/aeea344c-0003.jpg",
+      "Latitude": 55.66918117936507,
+      "Longitude": 37.76413162936509,
+      "Altitude": 127.38576984126985,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0004.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0002.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0004.jpg",
+      "ImageSrc": "./Images/aeea344c-0004.jpg",
+      "Latitude": 55.6692673330827,
+      "Longitude": 37.76417107368421,
+      "Altitude": 127.55270676691728,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0005.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0003.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0005.jpg",
+      "ImageSrc": "./Images/aeea344c-0005.jpg",
+      "Latitude": 55.6693520015873,
+      "Longitude": 37.764210973809526,
+      "Altitude": 127.7751984126984,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0006.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0004.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0006.jpg",
+      "ImageSrc": "./Images/aeea344c-0006.jpg",
+      "Latitude": 55.66943184047619,
+      "Longitude": 37.764248438888885,
+      "Altitude": 128.18550000000002,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0007.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0005.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0007.jpg",
+      "ImageSrc": "./Images/aeea344c-0007.jpg",
+      "Latitude": 55.669506829411766,
+      "Longitude": 37.764283542016805,
+      "Altitude": 128.49015966386554,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0008.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0006.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0008.jpg",
+      "ImageSrc": "./Images/aeea344c-0008.jpg",
+      "Latitude": 55.66958038421052,
+      "Longitude": 37.764318189473684,
+      "Altitude": 128.62806766917294,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0009.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0007.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0009.jpg",
+      "ImageSrc": "./Images/aeea344c-0009.jpg",
+      "Latitude": 55.669654706349206,
+      "Longitude": 37.764352166666676,
+      "Altitude": 128.7050873015873,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0010.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0008.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0010.jpg",
+      "ImageSrc": "./Images/aeea344c-0010.jpg",
+      "Latitude": 55.6697290406015,
+      "Longitude": 37.76438617819549,
+      "Altitude": 129.05066165413533,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0011.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0009.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0011.jpg",
+      "ImageSrc": "./Images/aeea344c-0011.jpg",
+      "Latitude": 55.66980555476189,
+      "Longitude": 37.76442199126984,
+      "Altitude": 129.4609841269841,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0012.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0010.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0012.jpg",
+      "ImageSrc": "./Images/aeea344c-0012.jpg",
+      "Latitude": 55.66988041587302,
+      "Longitude": 37.76445616746032,
+      "Altitude": 129.92731746031748,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0013.jpg",
+          "Yaw":0,
+          "Pitch":-3
+        },
+        {
+          "Path": "aeea344c-0011.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    },
+    {
+      "ImageId": "aeea344c-0013.jpg",
+      "ImageSrc": "./Images/aeea344c-0013.jpg",
+      "Latitude": 55.66995306269842,
+      "Longitude": 37.76448908015873,
+      "Altitude": 130.39184126984128,
+      "Hotspots": [
+        {
+          "Path": "aeea344c-0012.jpg",
+          "Yaw":190,
+          "Pitch":-3
+        }
+      ]
+    }
+  ]
+}

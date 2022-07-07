@@ -1,28 +1,26 @@
 {
   "files": {
     "main.css": "/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/static/js/main.0123c97b.chunk.js",
-    "main.js.map": "/static/js/main.0123c97b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.8a429f9b.js",
-    "runtime-main.js.map": "/static/js/runtime-main.8a429f9b.js.map",
-    "static/css/2.b793abc5.chunk.css": "/static/css/2.b793abc5.chunk.css",
-    "static/js/2.1a100a40.chunk.js": "/static/js/2.1a100a40.chunk.js",
-    "static/js/2.1a100a40.chunk.js.map": "/static/js/2.1a100a40.chunk.js.map",
-    "static/js/3.ae874368.chunk.js": "/static/js/3.ae874368.chunk.js",
-    "static/js/3.ae874368.chunk.js.map": "/static/js/3.ae874368.chunk.js.map",
+    "main.js": "/static/js/main.46537ec6.chunk.js",
+    "main.js.map": "/static/js/main.46537ec6.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ce044d7a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ce044d7a.js.map",
+    "static/css/2.180d3585.chunk.css": "/static/css/2.180d3585.chunk.css",
+    "static/js/2.3121f0c0.chunk.js": "/static/js/2.3121f0c0.chunk.js",
+    "static/js/2.3121f0c0.chunk.js.map": "/static/js/2.3121f0c0.chunk.js.map",
+    "static/js/3.58b43d09.chunk.js": "/static/js/3.58b43d09.chunk.js",
+    "static/js/3.58b43d09.chunk.js.map": "/static/js/3.58b43d09.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.b793abc5.chunk.css.map": "/static/css/2.b793abc5.chunk.css.map",
+    "static/css/2.180d3585.chunk.css.map": "/static/css/2.180d3585.chunk.css.map",
     "static/css/main.6dea0f05.chunk.css.map": "/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.1a100a40.chunk.js.LICENSE.txt": "/static/js/2.1a100a40.chunk.js.LICENSE.txt",
-    "static/media/alma.690bd3af.jpg": "/static/media/alma.690bd3af.jpg",
-    "static/media/pannellum.css": "/static/media/sprites.c08944fe.svg",
-    "static/media/video.8420cc1e.mp4": "/static/media/video.8420cc1e.mp4"
+    "static/js/2.3121f0c0.chunk.js.LICENSE.txt": "/static/js/2.3121f0c0.chunk.js.LICENSE.txt",
+    "static/media/pannellum.css": "/static/media/sprites.c08944fe.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.8a429f9b.js",
-    "static/css/2.b793abc5.chunk.css",
-    "static/js/2.1a100a40.chunk.js",
+    "static/js/runtime-main.ce044d7a.js",
+    "static/css/2.180d3585.chunk.css",
+    "static/js/2.3121f0c0.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.0123c97b.chunk.js"
+    "static/js/main.46537ec6.chunk.js"
   ]
 }

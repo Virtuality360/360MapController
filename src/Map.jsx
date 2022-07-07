@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, CircleMarker } from "react-leaflet";
-import { Images } from "./PanoConfigs/PanoConfig.json";
+import { Images } from "./PanoConfigs/demo-output.json";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
-import "./overrides.css";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
@@ -16,6 +15,7 @@ const MapComp = (props) => {
   for (const { Latitude, Longitude } of Images) {
     markers.push(
       <CircleMarker
+        key={Latitude.toString()}
         center={[Latitude, Longitude]}
         eventHandlers={{
           click: () => {
@@ -43,6 +43,7 @@ const MapComp = (props) => {
       <MarkerClusterGroup
         spiderfyDistanceMultiplier={1}
         showCoverageOnHover={false}
+        maxClusterRadius={20}
       >
         {markers}
       </MarkerClusterGroup>

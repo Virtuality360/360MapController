@@ -15,10 +15,12 @@ const MapPanoController = () => {
 
   return (
     <div className="pano-container" style={{
-            height:"100%"
+            height:"100vh",
+            width: "100vw"
                 }}>
       <div className="pano-map" style={{
-              height:"100%"
+              height:"100vh",
+              width: "100vw"
                 }}>
         {currentComponent === "Map" && (
           <MapComp
