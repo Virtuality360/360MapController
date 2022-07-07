@@ -4,6 +4,7 @@ import { Images } from "../PanoConfigs/demo-output.json";
 import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
 const PannellumReact = (props) => {
+  //gets the lat long of the point clicked, and returns the appropriate item in the JSON.
   function loadLatLong() {
     for (var i = 0; i < Images.length; i++) {
       if (props.latLong[0] === Images[i].Latitude) {
@@ -19,6 +20,7 @@ const PannellumReact = (props) => {
   const [yaw, setYaw] = useState(0);
   const [pitch, setPitch] = useState(0);
 
+  //goes to the specific item in the JSON and get its information.
   function getJSONIndex() {
     for (var i = 0; i < Images.length; i++) {
       if (id === Images[i].ImageId) {
@@ -35,25 +37,19 @@ const PannellumReact = (props) => {
   }
 
   let hotspots = [];
+
+  //gets the hotspot information of an image from the JSON
   const { ImageSrc, Hotspots } = Images[getJSONIndex()];
 
+  //if there are hotspots defined in the JSON, get their information and load it as a hotspot in the Pano Viewer
   if (Hotspots != null) {
     for (const { Pitch, Yaw, Path } of Hotspots) {
       hotspots.push(
-        /*<Pannellum.Hotspot
-        type="custom"
-        pitch={Pitch}
-        yaw={Yaw}
-        key={shortid.generate()}
-        handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
-        />*/
-
         <CustomPannellumHotspot
           type="custom"
           pitch={Pitch}
           yaw={Yaw}
           handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
-          //handleClick = {_.bind(handleClickHotspot, this)}
         />
       );
     }
@@ -68,9 +64,7 @@ const PannellumReact = (props) => {
         yaw={yaw}
         hfov={110}
         autoLoad
-        onLoad={() => {
-          console.log("panorama loaded");
-        }}
+        onLoad={() => {console.log("panorama loaded");}}
       >
         {hotspots}
       </Pannellum>
