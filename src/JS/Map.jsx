@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, CircleMarker } from "react-leaflet";
-import { Images } from "./PanoConfigs/demo-output.json";
+import { Images } from "../PanoConfigs/demo-output.json";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
 import "leaflet/dist/leaflet.css";
 import "react-leaflet-markercluster/dist/styles.min.css";
-import "./overrides.css";
+import "../CSS/overrides.css";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
