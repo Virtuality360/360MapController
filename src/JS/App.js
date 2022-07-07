@@ -20,11 +20,11 @@ const MapPanoController = () => {
   return (
     <div className="pano-container" style={{height:"100vh",width: "100vw"}}>
       <div className="pano-map" style={{height:"100vh",width: "100vw"}}>
-        //Map Component
+        {/*Map Component*/}
         {currentComponent === "Map" && (
           <MapComp toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>
         )}
-        //PanoViewer Component
+        {/*PanoViewer Component*/}
         {currentComponent === "PanoViewer" && (
           <ControllerButton toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>
         )}
