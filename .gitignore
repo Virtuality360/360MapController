@@ -5,3 +5,4 @@ yarn.lock
 public/Images/
 assets/images/
 Output_Files
+**/.DS_Store
