@@ -16,8 +16,8 @@ const MapComp = (props) => {
 
   //reads the Pano Config JSON and gets the points for the map
   for (const { Latitude, Longitude } of Images) {
+    //defines the points as "circle" points rather than the defualt pin point
     markers.push(
-      //defines the points as "circle" points rather than the defualt pin point
       <CircleMarker
         key={Latitude.toString()}
         center={[Latitude, Longitude]}
@@ -30,6 +30,9 @@ const MapComp = (props) => {
     );
   }
 
+  //TileLayer : Defines the map imagery to use.
+  //MarkerClusterGroup : Defines the use of the abilty to automaticly group up points under one larger point to increase speed of load times.
+  //markers : Loads in the list of points.
   return (
     <MapContainer
       className="markercluster-map"
@@ -39,19 +42,15 @@ const MapComp = (props) => {
       whenCreated={setMap}
       style={{ height: "100%", width: "100%" }}
     >
-      <! -- Defines the map imagery to use -->
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
       />
-
-      <! -- Defines the use of the abilty to automaticly group up points under one larger point to increase speed of load times. -->
       <MarkerClusterGroup
         spiderfyDistanceMultiplier={1}
         showCoverageOnHover={false}
         maxClusterRadius={20}
       >
-        <! -- Loads in the list of points -->
         {markers}
       </MarkerClusterGroup>
     </MapContainer>
