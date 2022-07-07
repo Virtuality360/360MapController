@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, CircleMarker } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker } from "react-leaflet";
 import { Images } from "../PanoConfigs/demo-output.json";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 
@@ -9,8 +9,8 @@ import "../CSS/overrides.css";
 
 const MapComp = (props) => {
   const [map, setMap] = useState(null);
-  const [zoomLevel, setZoomLevel] = useState(props.zoom);
-  const [latLong, setlatLong] = useState(props.latLong);
+  const [zoomLevel] = useState(props.zoom);
+  const [latLong] = useState(props.latLong);
 
   let markers = [];
   for (const { Latitude, Longitude } of Images) {
