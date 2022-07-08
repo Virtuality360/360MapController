@@ -16,20 +16,14 @@ const MapPanoController = () => {
     setZoomLevel(zoomLevel);
     setCurrentComponent(currentComponent);
   }
-
+  
   return (
     <div className="pano-container" style={{height:"100vh",width: "100vw"}}>
-      <div className="pano-map" style={{height:"100vh",width: "100vw"}}>
-        {/*Map Component*/}
-        {currentComponent === "Map" && (
-          <MapComp toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>
-        )}
-        {/*PanoViewer Component*/}
-        {currentComponent === "PanoViewer" && (
-          <ControllerButton toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>
-        )}
-      </div>
-    </div>
+        {/** Display the current component, if currentComponent is null, display the map */}
+        {{'Map': <MapComp toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>,
+          'PanoViewer': <ControllerButton toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>
+        }[currentComponent] || <MapComp toggleMap={switchComponent} latLong={latLong} zoom={zoomLevel}/>}
+  </div>
   );
 };
 
