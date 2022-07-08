@@ -16,15 +16,15 @@ const MapComp = (props) => {
   let markers = [];
 
   //reads the Pano Config JSON and gets the points for the map
-  for (const { Latitude, Longitude } of Images) {
+  for (const { LatLong } of Images) {
     //defines the points as "circle" points rather than the defualt pin point
     markers.push(
       <CircleMarker
-        key={Latitude.toString()}
-        center={[Latitude, Longitude]}
+        key={LatLong.toString()}
+        center={LatLong}
         eventHandlers={{
           click: () => {
-            props.toggleMap("PanoViewer", [Latitude, Longitude], map.getZoom());
+            props.toggleMap("PanoViewer", LatLong, map.getZoom());
           },
         }}
       ></CircleMarker>
@@ -43,10 +43,12 @@ const MapComp = (props) => {
       whenCreated={setMap}
       style={{ height: "100%", width: "100%" }}
     >
+        {/** The map to use */}
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url={CONSTS.mapOverlays['CartoDB World Antique']}
       />
+      {/** Set up the markers */}
       <MarkerClusterGroup
         spiderfyDistanceMultiplier={1}
         showCoverageOnHover={false}

@@ -7,10 +7,8 @@ const PannellumReact = (props) => {
   //gets the lat long of the point clicked, and returns the appropriate item in the JSON.
   function loadLatLong() {
     for (var i = 0; i < Images.length; i++) {
-      if (props.latLong[0] === Images[i].Latitude) {
-        if (props.latLong[1] === Images[i].Longitude) {
-          return Images[i].ImageId;
-        }
+        if (props.latLong == Images[i].LatLong) {
+            return Images[i].ImageId;
       }
     }
     return null;
