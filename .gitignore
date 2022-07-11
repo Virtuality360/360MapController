@@ -3,6 +3,7 @@ node_modules
 
 #removes old production builds
 build.old
+build
 
 #removes list of locally stored packages
 package-lock.json

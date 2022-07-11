@@ -2,10 +2,12 @@
   "name": "react-controller",
   "version": "0.1.0",
   "private": true,
+  "main": "src/electron.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "electron": "^19.0.8",
     "esri-leaflet": "^3.0.3",
     "esri-leaflet-geocoder": "^3.1.1",
     "leaflet": "^1.7.1",
@@ -23,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
+    "electron": "wait-on tcp:3000 && electron ."
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +41,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "json-loader": "^0.5.7"
+    "concurrently": "^7.2.2",
+    "electron-is-dev": "^2.0.0",
+    "json-loader": "^0.5.7",
+    "wait-on": "^6.0.1"
   }
 }
