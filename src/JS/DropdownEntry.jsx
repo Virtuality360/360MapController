@@ -1,4 +1,4 @@
-const DropdownEntree = (props) => {
+const DropdownEntry = (props) => {
 
     function handleClick() {
         console.log(props.name)
@@ -12,4 +12,4 @@ const DropdownEntree = (props) => {
 
 }
 
-export default DropdownEntree
+export default DropdownEntry
