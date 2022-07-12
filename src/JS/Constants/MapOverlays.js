@@ -1,8 +1,8 @@
 export const mapOverlays = {
-    'CartoDB Positron' : 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-    'CartoDB Dark matter' : 'http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
-    'CartoDB Positron (lite)' : 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-    'CartoDB Dark matter (lite)' : 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
+    'CartoDB Positron' : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+    'CartoDB Dark matter' : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+    'CartoDB Positron (lite)' : 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
+    'CartoDB Dark matter (lite)' : 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
     'CartoDB World Antique' : 'https://cartocdn_{s}.global.ssl.fastly.net/base-antique/{z}/{x}/{y}.png',
     'CartoDB World Eco' : 'https://cartocdn_{s}.global.ssl.fastly.net/base-eco/{z}/{x}/{y}.png',
     'CartoDB World Flat Blue' : 'https://cartocdn_{s}.global.ssl.fastly.net/base-flatblue/{z}/{x}/{y}.png',
