@@ -16,6 +16,10 @@ Run:
 
 This will open up a new webpage in your browser and load the map.
 
+To run as an electron app, run :
+
+#### ` npm run dev`
+
 ### For Production
 
 Run:
