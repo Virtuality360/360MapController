@@ -36,6 +36,7 @@ const MapComp = (props) => {
   //markers : Loads in the list of points.
   return (
     <MapContainer
+      key={props.style}
       className="markercluster-map"
       center={latLong}
       zoom={zoomLevel}
@@ -46,7 +47,7 @@ const MapComp = (props) => {
         {/** The map to use */}
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url={CONSTS.mapOverlays['CartoDB World Antique']}
+        url={CONSTS.mapOverlays[props.style]}
       />
       {/** Set up the markers */}
       <MarkerClusterGroup
