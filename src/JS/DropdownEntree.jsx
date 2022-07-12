@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const DropdownEntree = (props) => {
 
     function handleClick() {

@@ -1,6 +1,5 @@
 import "../CSS/MenuBarDropdown.css"
 import DropdownEntree from "./DropdownEntree";
-import * as CONSTS from "./Constants/MapOverlays";
 
 const DropDown = (props) => {
 
