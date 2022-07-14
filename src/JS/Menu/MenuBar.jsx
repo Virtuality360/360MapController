@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import MenuBarDropdown from "./MenuBarDropdown";
-import * as CONSTS from "./Constants/MapOverlays";
+import * as CONSTS from "../../Constants/MapOverlays";
 
 const MenuBar = (props) => {
 

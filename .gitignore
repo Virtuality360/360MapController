@@ -1,20 +1,25 @@
-#removes locally stored packages
-node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#removes old production builds
-build.old
-build
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
-#removes list of locally stored packages
-package-lock.json
-yarn.lock
+# testing
+/coverage
 
-#removes images from being stored in project
-public/Images/
-assets/images/
+# production
+/build
+/dist
+/out
 
-#removes JSON script output leftovers
-Output_Files
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-#removes Mac Specific Files
-**/.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

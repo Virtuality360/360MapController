@@ -1,49 +1,81 @@
 {
-  "name": "react-controller",
+  "name": "my-electron-app",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron.js",
+  "homepage": "./",
+  "main": "./public/electron.js",
+  "author": "",
+  "description": "",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "electron": "^19.0.8",
-    "esri-leaflet": "^3.0.3",
-    "esri-leaflet-geocoder": "^3.1.1",
-    "leaflet": "^1.7.1",
-    "nanoid": "^4.0.0",
+    "@changey/react-leaflet-markercluster": "^4.0.0-rc1",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "leaflet": "^1.8.0",
     "pannellum-react": "^1.2.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-leaflet": "^3.2.2",
-    "react-leaflet-markercluster": "^3.0.0-rc1",
-    "react-scripts": "4.0.3",
-    "underscore": "^1.13.1",
-    "web-vitals": "^1.0.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.0.1",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "concurrently -k \"BROWSER=none npm start\" \"npm:electron\"",
-    "electron": "wait-on tcp:3000 && electron ."
+    "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "electron:package:mac": "npm run build && electron-builder -m -c.extraMetadata.main=build/electron.js",
+    "electron:package:win": "npm run build && electron-builder -w -c.extraMetadata.main=build/electron.js",
+    "electron:package:linux": "npm run build && electron-builder -l -c.extraMetadata.main=build/electron.js"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:react-hooks/recommended"
     ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
     "concurrently": "^7.2.2",
-    "electron-is-dev": "^2.0.0",
-    "json-loader": "^0.5.7",
+    "cross-env": "^7.0.3",
+    "electron": "^19.0.8",
+    "electron-builder": "^23.1.0",
+    "electronmon": "^2.0.2",
+    "eslint": "^8.19.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "wait-on": "^6.0.1"
+  },
+  "build": {
+    "appId": "com.electron.myapp",
+    "productName": "My Electron App",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "deb"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import "../CSS/MenuBarDropdown.css"
+import "../../CSS/MenuBarDropdown.css"
 import DropdownEntree from "./DropdownEntry";
 
 const DropDown = (props) => {
