@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MenuBarDropdown from "./MenuBarDropdown";
 import * as CONSTS from "../../Constants/MapOverlays";
+import "../../CSS/MenuBar.css"
 
 const MenuBar = (props) => {
 
@@ -17,11 +18,11 @@ const MenuBar = (props) => {
 
     return (
         <div className="MenuBar-container">
-            <ul style={{display:"inline", float:"left", listStyleType: "none", padding:"0px", margin:"15px"}}>
-                <input type="text" placeholder="Search..." style={{float:"left", padding:'10px'}}
-                    value={searchQuery} onChange={e=>handleChange(e)} onKeyDown={e=>handleDown(e)} />
-                <li style={{float:"left", padding:'10px'}}>Datapoints</li>
+            <ul className="MenuBar">
+                <input className="SearchBar" type="text" placeholder="Search..."
+                value={searchQuery} onChange={e=>handleChange(e)} onKeyDown={e=>handleDown(e)} />
                 <MenuBarDropdown title="Maps" content={CONSTS.mapOverlays} switchStyle={props.switchStyle}/>
+                <li className="Datapoints">Datapoints</li>
             </ul>
         </div>
     )

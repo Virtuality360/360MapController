@@ -1,5 +1,5 @@
 import "../../CSS/MenuBarDropdown.css"
-import DropdownEntree from "./DropdownEntry";
+import DropdownEntry from "./DropdownEntry";
 
 const DropDown = (props) => {
 
@@ -7,11 +7,10 @@ const DropDown = (props) => {
 
     for(const map in props.content) {
         options.push(
-            <DropdownEntree 
-                name={map}
-                key={map}
-                switchStyle={props.switchStyle}
-            />
+            <DropdownEntry 
+            name={map}
+            key={map}
+            switchStyle={props.switchStyle}/>
         )
     }
 

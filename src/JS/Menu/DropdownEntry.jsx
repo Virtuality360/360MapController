@@ -7,7 +7,7 @@ const DropdownEntry = (props) => {
     }
 
     return (
-        <button onClick={handleClick}>{props.name}</button>
+        <div onClick={handleClick} className="ddEntry">{props.name}</div>
     )
 
 }

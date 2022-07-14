@@ -1,0 +1,17 @@
+.MenuBar {
+    display:inline;
+    float:left;
+    list-style-type: none;
+    padding-left:15px;
+}
+
+.SearchBar {
+    float: left;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.Datapoints {
+    float:left;
+    padding:10px;
+}
