@@ -3,7 +3,7 @@ const DropdownEntry = (props) => {
     function handleClick() {
         console.log(props.name)
         let style = props.name
-        //props.switchStyle(style)
+        props.switchStyle(style)
     }
 
     return (
