@@ -1,11 +1,11 @@
 {
-  "name": "my-electron-app",
+  "name": "v360-map-controller",
   "version": "0.1.0",
   "private": true,
   "homepage": "./",
   "main": "./public/electron.js",
-  "author": "",
-  "description": "",
+  "author": "Virtuality360",
+  "description": "View geolocated 360 photos",
   "dependencies": {
     "@changey/react-leaflet-markercluster": "^4.0.0-rc1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -59,8 +59,8 @@
     "wait-on": "^6.0.1"
   },
   "build": {
-    "appId": "com.electron.myapp",
-    "productName": "My Electron App",
+    "appId": "com.Virtuality360.MapController",
+    "productName": "V360 Map Controller",
     "files": [
       "build/**/*",
       "node_modules/**/*"
