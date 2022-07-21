@@ -10,25 +10,29 @@ import "../../CSS/overrides.css";
 import * as CONSTS from "../../Constants/MapOverlays";
 
 const MapComp = (props) => {
-    // useMap is not working with updated dependencies
-    //const map = useMap();
-    const [zoomLevel] = useState(props.zoom);
-    const [latLong] = useState(props.latLong);
+    //useMap is not working with updated dependencies
+    const [map, setMap] = useState(null)
+    const [zoom, setZoom] = useState(3);
+    const [latLong, setLatLong] = useState([0,0]);
 
     let markers = [];
 
     //reads the Pano Config JSON and gets the points for the map
-    for (const { LatLong } of Images.Images) {
+    for (const { LatLong, ImageId } of Images.Images) {
         //defines the points as "circle" points rather than the defualt pin point
         markers.push(
         <CircleMarker
-        key={LatLong.toString()}
+        key={ImageId}
         center={LatLong}
+        
         eventHandlers={{
             click: () => {
-                props.toggleMap("PanoViewer", LatLong, zoomLevel);
+                props.toggleMap("PanoViewer", LatLong/*, zoomLevel*/);
+                console.log("Map.js", LatLong, ImageId)
             },
-        }}>
+        }}
+
+        >
         </CircleMarker>
         );
     }
@@ -39,10 +43,10 @@ const MapComp = (props) => {
     return (
         <MapContainer
         className="markercluster-map"
-        center={latLong}
-        zoom={zoomLevel}
+        center={latLong}//{latLong}
+        zoom={zoom}//{zoomLevel}
         scrollWheelZoom={true}
-        //whenCreated={setMap}
+        ref={setMap}
         style={{ height: "100%", width: "100%" }}>
             {/** The map to use */}
             <TileLayer

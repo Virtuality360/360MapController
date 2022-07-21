@@ -11,7 +11,7 @@ const ControllerButton = (props) => {
       {/*creates the PanoViewer*/}
       <div style={{height:"100%"}}>
         <button className="plnm-controls" onClick={handleClick}>Map</button>
-        < PannellumReact latLong={props.latLong} zoom={props.zoom} />
+        <PannellumReact latLong={props.latLong} /*zoom={props.zoom} *//>
       </div>
     </div>
   );

@@ -12,15 +12,16 @@ const MapPanoController = () => {
     //sets the defualt position of the map, (0, 0) is centered.
     const [latLong, setLatLong] = useState([0, 0]);
     //sets the defualt zoom of the map, 3 is 3 zoom levels deep.
-    const [zoomLevel, setZoomLevel] = useState(3);
+    //const [zoomLevel, setZoomLevel] = useState(3);
     //sets the default map style
     const [mapStyle, setMapStyle] = useState('CartoDB Dark matter');
 
     // defines the switch component function and inputs the latlong and zoom as necessary,
     // as well as the current component (either map or panoviewer)
-    function switchComponent(currentComponent, latLong, zoomLevel) {
+    function switchComponent(currentComponent, latLong/*, zoomLevel*/) {
+        console.log("sitchComponent", latLong);
         setLatLong(latLong);
-        setZoomLevel(zoomLevel);
+        //setZoomLevel(zoomLevel);
         setCurrentComponent(currentComponent);
     }
 
@@ -28,16 +29,18 @@ const MapPanoController = () => {
         setMapStyle(newStyle);
     }
 
-    let prop = {toggleMap : switchComponent, latLong : latLong, zoom : zoomLevel, style : mapStyle}
+    //let prop = {toggleMap : switchComponent, /*latLong : latLong, zoom : zoomLevel,*/ style : mapStyle}
 
     return (
         <div className="Virtuality360-container" style={{height:"10vh", width:"100vw"}}>
             <MenuBar switchStyle={switchStyle} />
             <div className="pano-container" style={{height:"90vh",width: "100vw"}}>
                 {/** Display the current component, if currentComponent is null, display the map */}
-                {{'Map': <MapComp {...prop}/>,
-                'PanoViewer': <ControllerButton {...prop}/>
-                }[currentComponent] || <MapComp {...prop}/>}
+
+                {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent}/>,
+                'PanoViewer': <ControllerButton latLong={latLong}/>
+                }[currentComponent] || <MapComp style ={mapStyle}/>}
+
             </div>
         </div>
       );
