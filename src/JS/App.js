@@ -34,12 +34,12 @@ const MapPanoController = () => {
     return (
         <div className="Virtuality360-container" style={{height:"10vh", width:"100vw"}}>
             <MenuBar switchStyle={switchStyle} />
-            <div className="pano-container" style={{height:"90vh",width: "100vw"}}>
+            <div key={currentComponent} className="pano-container" style={{height:"90vh",width: "100vw"}}>
                 {/** Display the current component, if currentComponent is null, display the map */}
 
                 {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent}/>,
-                'PanoViewer': <ControllerButton latLong={latLong}/>
-                }[currentComponent] || <MapComp style ={mapStyle}/>}
+                'PanoViewer': <ControllerButton latLong={latLong} toggleMap={switchComponent}/>
+                }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>}
 
             </div>
         </div>

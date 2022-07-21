@@ -3,7 +3,8 @@ import PannellumReact from "./PannellumReact.jsx";
 
 const ControllerButton = (props) => {
   function handleClick() {
-    props.toggleMap("Map", props.latLong, props.zoom);
+    console.log("Controller Button Clicked")
+    props.toggleMap("Map", props.latLong, /*props.zoom*/);
   }
 
   return (
