@@ -58,7 +58,11 @@ function MapEvents(props) {
     return null
 }
 
-
+/**
+ * React component for the map
+ * @param {*} props 
+ * @returns The map component
+ */
 const MapComp = (props) => {
     // get a ref to the underlying L.geoJSON
     const geoJsonRef = useRef()
@@ -111,9 +115,11 @@ const MapComp = (props) => {
         }
     }, [geoJsonRef, geoJSON])
 
-    //TileLayer : Defines the map imagery to use.
-    //MarkerClusterGroup : Defines the use of the abilty to automaticly group up points under one larger point to increase speed of load times.
-    //markers : Loads in the list of points.
+    /**
+     * TileLayer : Defines the map imagery to use
+     * MarkerClusterGroup : Defines how points are automatically grouped together
+     * Markers : An array of CircleMarkers
+     */
     return (
         <MapContainer
         className="markercluster-map"
@@ -122,21 +128,17 @@ const MapComp = (props) => {
         scrollWheelZoom={true}
         ref={setMap}
         style={{ height: "100%", width: "100%" }}>
-            {/** The map to use */}
             <TileLayer
-            key={props.style}
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url={CONSTS.mapOverlays[props.style]}/>
-            {/** Enables use of map event handlers */}
+                key={props.style}
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url={CONSTS.mapOverlays[props.style]}/>
             <MapEvents setBounds={setBounds}/>
-            {/** GeoJson Layer */}
             <GeoJSON key={bounds} data={geoJSON} ref={geoJsonRef} />
-            {/** Set up the markers */}
             <MarkerClusterGroup
-            spiderfyDistanceMultiplier={1}
-            showCoverageOnHover={false}
-            maxClusterRadius={20}>
-                {markers}
+                spiderfyDistanceMultiplier={1}
+                showCoverageOnHover={false}
+                maxClusterRadius={20}>
+                    {markers}
             </MarkerClusterGroup>
         </MapContainer>
     );
