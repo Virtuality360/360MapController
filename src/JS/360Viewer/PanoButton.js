@@ -1,6 +1,13 @@
 import React from "react";
 import PannellumReact from "./PannellumReact.jsx";
 
+/**
+ * Creates a component that has a button to switch
+ * from pano view to map view,
+ * and a Panellum component
+ * @param {*} props 
+ * @returns 
+ */
 const ControllerButton = (props) => {
   function handleClick() {
     console.log("Controller Button Clicked")
