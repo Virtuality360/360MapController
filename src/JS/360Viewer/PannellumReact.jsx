@@ -53,6 +53,7 @@ const PannellumReact = (props) => {
                   pitch={Pitch}
                   yaw={Yaw}
                   handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
+                  key={Path}
                 />
             );
         }
