@@ -5,14 +5,18 @@ import ControllerButton from "./360Viewer/PanoButton.js";
 
 import logo from '../logo.svg';
 import '../CSS/App.css';
+import "../CSS/360MapController.css";
 
 const MapPanoController = () => {
     //loads the map
     const [currentComponent, setCurrentComponent] = useState("Map");
+
     //sets the defualt position of the map, (0, 0) is centered.
     const [latLong, setLatLong] = useState([0, 0]);
+
     //sets the defualt zoom of the map, 3 is 3 zoom levels deep.
     //const [zoomLevel, setZoomLevel] = useState(3);
+
     //sets the default map style
     const [mapStyle, setMapStyle] = useState('CartoDB Dark matter');
 
@@ -29,12 +33,11 @@ const MapPanoController = () => {
         setMapStyle(newStyle);
     }
 
-    //let prop = {toggleMap : switchComponent, /*latLong : latLong, zoom : zoomLevel,*/ style : mapStyle}
+    //let prop = {toggleMap : switchComponent, /*l atLong : latLong, zoom : zoomLevel,*/ style : mapStyle}
 
     return (
-        <div className="Virtuality360-container" style={{height:"10vh", width:"100vw"}}>
-            <MenuBar switchStyle={switchStyle} />
-            <div key={currentComponent} className="pano-container" style={{height:"90vh",width: "100vw"}}>
+        <div className="Virtuality360-container"> 
+            <div key={currentComponent} className="pano-container">
                 {/** Display the current component, if currentComponent is null, display the map */}
 
                 {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent}/>,
@@ -42,6 +45,7 @@ const MapPanoController = () => {
                 }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>}
 
             </div>
+
         </div>
       );
 

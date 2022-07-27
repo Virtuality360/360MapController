@@ -3,6 +3,8 @@ import { Pannellum } from "pannellum-react";
 import JSON from "../../PanoConfigs/demo-output.json";
 import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
+import "../../CSS/360MapController.css";
+
 const PannellumReact = (props) => {
 
     let Images = JSON.Images;
@@ -44,23 +46,22 @@ const PannellumReact = (props) => {
 
     //if there are hotspots defined in the JSON, get their information and load it as a hotspot in the Pano Viewer
     if (Hotspots != null) {
-        for (const { Pitch, Yaw, Path } of Hotspots) {
-        hotspots.push(
-            <CustomPannellumHotspot
-            type="custom"
-            pitch={Pitch}
-            yaw={Yaw}
-            handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
-            key={Path}
-            />
-        );
+    for (const { Pitch, Yaw, Path } of Hotspots) {
+      hotspots.push(
+                <CustomPannellumHotspot
+                  type="custom"
+                  pitch={Pitch}
+                  yaw={Yaw}
+                  handleClick={() => handleClickHotspot(Path, Pitch, Yaw)}
+                />
+            );
         }
     }
 
     return (
         <Pannellum
-        width="100%"
         height="100%"
+        width="100%"
         image={ImageSrc}
         pitch={pitch}
         yaw={yaw}
