@@ -14,8 +14,10 @@ import * as CONSTS from "../../Constants/MapOverlays";
 const MapComp = (props) => {
     //useMap is not working with updated dependencies
     const [map, setMap] = useState(null)
-    const [zoom, setZoom] = useState(3);
-    const [latLong, setLatLong] = useState([0,0]);
+    const [zoom, setZoom] = useState(props.zoom);
+    const [latLong, setLatLong] = useState(props.latLong);
+    const [bounds, setBounds] = useState()
+    const [geoJSON, setGeoJSON] = useState()
 
     let markers = [];
 
@@ -29,7 +31,7 @@ const MapComp = (props) => {
         
         eventHandlers={{
             click: () => {
-                props.toggleMap("PanoViewer", LatLong/*, zoomLevel*/);
+                props.toggleMap("PanoViewer", LatLong, map.getZoom());
                 console.log("Map.js", LatLong, ImageId)
             },
         }}>

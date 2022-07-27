@@ -11,8 +11,11 @@ const PannellumReact = (props) => {
 
     //gets the lat long of the point clicked, and returns the appropriate item in the JSON.
     function loadLatLong() {
+        console.log(props.latLong)
         for (var i = 0; i < Images.length; i++) {
-            if (props.latLong === Images[i].LatLong) {
+            console.log(props.latLong + " === " + Images[i].LatLong)
+            console.log(props.latLong === Images[i].LatLong)
+            if (props.latLong == Images[i].LatLong) {
                 return Images[i].ImageId;
             }
         }
@@ -25,6 +28,7 @@ const PannellumReact = (props) => {
     
     //goes to the specific item in the JSON and get its information.
     function getJSONIndex() {
+        console.log('gji')
         for (var i = 0; i < Images.length; i++) {
             if (id === Images[i].ImageId) {
                 return i;

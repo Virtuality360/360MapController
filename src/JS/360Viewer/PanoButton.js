@@ -12,14 +12,14 @@ import "../../CSS/360MapController.css";
  */
 const ControllerButton = (props) => {
   function handleClick() {
-    //console.log("Controller Button Clicked")
-    props.toggleMap("Map", props.latLong, /*props.zoom*/);
+    console.log("Controller Button Clicked")
+    props.toggleMap("Map", props.latLong, props.zoom);
   }
 
   return (
-      <div className="plnm-wrapper" > 
-        <button className="plnm-control" onClick={handleClick}>Map</button>
-        <PannellumReact latLong={props.latLong} /*zoom={props.zoom} *//>
+    <div className="plnm-wrapper">
+        <button className="plnm-controls" onClick={handleClick}>Map</button>
+        <PannellumReact latLong={props.latLong} zoom={props.zoom} />
       </div>
   );
 };
