@@ -12,7 +12,6 @@ import "../../CSS/360MapController.css";
  */
 const ControllerButton = (props) => {
   function handleClick() {
-    console.log("Controller Button Clicked")
     props.toggleMap("Map", props.latLong, props.zoom);
   }
 

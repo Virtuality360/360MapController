@@ -32,7 +32,6 @@ const MapComp = (props) => {
         eventHandlers={{
             click: () => {
                 props.toggleMap("PanoViewer", LatLong, map.getZoom());
-                console.log("Map.js", LatLong, ImageId)
             },
         }}>
 

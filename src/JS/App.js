@@ -22,7 +22,6 @@ const MapPanoController = () => {
     // defines the switch component function and inputs the latlong and zoom as necessary,
     // as well as the current component (either map or panoviewer)
     function switchComponent(currentComponent, latLong, zoomLevel) {
-        console.log("sitchComponent", latLong);
         setLatLong(latLong);
         setZoomLevel(zoomLevel);
         setCurrentComponent(currentComponent);
