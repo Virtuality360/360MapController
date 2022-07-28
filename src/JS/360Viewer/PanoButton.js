@@ -17,7 +17,7 @@ const ControllerButton = (props) => {
 
   return (
     <div className="plnm-wrapper">
-        <button className="plnm-controls" onClick={handleClick}>Map</button>
+        <button className="pnlm-control map-button" onClick={handleClick}>Map</button>
         <PannellumReact latLong={props.latLong} zoom={props.zoom} />
       </div>
   );
