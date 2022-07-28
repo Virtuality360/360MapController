@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Pannellum } from "pannellum-react";
+// import { Pannellum } from "pannellum-react";
+import { Pannellum } from "@karianpour/pannellum-react";
+import "@karianpour/pannellum-react/es/pannellum/css/video-js.css";
+import "@karianpour/pannellum-react/es/pannellum/css/pannellum.css";
+import "@karianpour/pannellum-react/es/pannellum/css/style-textInfo.css";
 import JSON from "../../PanoConfigs/demo-output.json";
 import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
@@ -12,7 +16,7 @@ const PannellumReact = (props) => {
     //gets the lat long of the point clicked, and returns the appropriate item in the JSON.
     function loadLatLong() {
         for (var i = 0; i < Images.length; i++) {
-            if (props.latLong == Images[i].LatLong) {
+            if (props.latLong === Images[i].LatLong) {
                 return Images[i].ImageId;
             }
         }

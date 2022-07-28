@@ -8,7 +8,7 @@
   "description": "View geolocated 360 photos",
   "dependencies": {
     "@changey/react-leaflet-markercluster": "^4.0.0-rc1",
-    "@karianpour/pannellum-react": "github:kayvaninvemo/pannellum-react",
+    "@karianpour/pannellum-react": "^2.0.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
