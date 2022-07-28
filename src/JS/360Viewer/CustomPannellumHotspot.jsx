@@ -10,7 +10,7 @@ const CustomPannellumHotspot = (props) => {
       yaw={props.yaw}
       path={props.path}
       key={nanoid()}
-      //handleClick={props.handleClick}
+      handleClick={props.handleClick}
     />
   );
 };

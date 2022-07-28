@@ -45,8 +45,8 @@ const MapComp = (props) => {
     return (
         <MapContainer
         className="markercluster-map"
-        center={latLong}//{latLong}
-        zoom={zoom}//{zoomLevel}
+        center={latLong}
+        zoom={zoom}
         scrollWheelZoom={true}
         ref={setMap}>
             {/** The map to use */}
