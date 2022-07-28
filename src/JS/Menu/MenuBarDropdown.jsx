@@ -5,11 +5,11 @@ const DropDown = (props) => {
 
     let options = []
 
-    for(const map in props.content) {
+    for(const property in props.content) {
         options.push(
             <DropdownEntry 
-            name={map}
-            key={map}
+            name={property}
+            key={property}
             switchStyle={props.switchStyle}/>
         )
     }
