@@ -44,7 +44,7 @@ const MapComp = (props) => {
     //markers : Loads in the list of points.
     return (
         <MapContainer
-        className="markercluster-map"
+        className="Virtuality360-container"
         center={latLong}
         zoom={zoom}
         scrollWheelZoom={true}

@@ -16,10 +16,14 @@ const ControllerButton = (props) => {
   }
 
   return (
-    <div className="plnm-wrapper">
-        <button className="pnlm-control map-button" onClick={handleClick}>Map</button>
-        <PannellumReact latLong={props.latLong} zoom={props.zoom} />
-      </div>
+    <div className="pnlm-wrapper Virtuality360-container">
+        <div className="pnlm Virtuality360-container">
+          <PannellumReact latLong={props.latLong} zoom={props.zoom} />
+        </div>
+        <div className="pnlm-control">
+          <button className="map-button" onClick={handleClick}>Map</button>
+        </div>
+    </div>
   );
 };
 

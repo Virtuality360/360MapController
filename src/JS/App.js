@@ -35,7 +35,7 @@ const MapPanoController = () => {
 
     return (
         <div className="Virtuality360-container"> 
-            <div key={currentComponent} className="pano-container">
+            <div key={currentComponent} className="Virtuality360-container">
                 {/** Display the current component, if currentComponent is null, display the map */}
 
                 {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent} zoom={zoomLevel} latLong={latLong}/>,
