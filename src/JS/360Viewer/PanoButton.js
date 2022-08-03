@@ -1,6 +1,8 @@
 import React from "react";
 import PannellumReact from "./PannellumReact.jsx";
 
+import "../../CSS/360MapController.css";
+
 /**
  * Creates a component that has a button to switch
  * from pano view to map view,
@@ -10,17 +12,17 @@ import PannellumReact from "./PannellumReact.jsx";
  */
 const ControllerButton = (props) => {
   function handleClick() {
-    console.log("Controller Button Clicked")
-    props.toggleMap("Map", props.latLong, /*props.zoom*/);
+    props.toggleMap("Map", props.latLong, props.zoom);
   }
 
   return (
-    <div style={{height:"100%"}}>
-      {/*creates the PanoViewer*/}
-      <div style={{height:"100%"}}>
-        <button className="plnm-controls" onClick={handleClick}>Map</button>
-        <PannellumReact latLong={props.latLong} /*zoom={props.zoom} *//>
-      </div>
+    <div className="pnlm-wrapper Virtuality360-container">
+        <div className="pnlm Virtuality360-container">
+          <PannellumReact latLong={props.latLong} zoom={props.zoom} />
+        </div>
+        <div className="pnlm-control">
+          <button className="map-button" onClick={handleClick}>Map</button>
+        </div>
     </div>
   );
 };
