@@ -1,7 +1,0 @@
-.pnlm-container{margin:0;padding:0;overflow:hidden;position:relative;cursor:default;width:100%;height:100%;font-family:Helvetica,"Nimbus Sans L","Liberation Sans",Arial,sans-serif;background:#f4f4f4 url('../assets/images/background.9f2131c2.svg') repeat;-webkit-user-select:none;-o-user-select:none;-ms-user-select:none;user-select:none;outline:0;line-height:1.4;contain:content;touch-action:none}
-
-.pnlm-grab{cursor:-webkit-grab;cursor:grab;cursor:url(../assets/images/grab.adb137f0.svg) 12 8,default}
-
-.pnlm-sprite{background-image:url(../assets/images/sprites.f37aa8ca.svg)}
-
-.pnlm-grabbing{cursor:-webkit-grabbing;cursor:grabbing;cursor:url(../assets/images/grabbing.3acfddd5.svg) 12 8,default}

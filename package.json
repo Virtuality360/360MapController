@@ -5,7 +5,6 @@
   "homepage": "./",
   "main": "./public/electron.js",
   "author": "Virtuality360",
-  "description": "View geolocated 360 photos",
   "dependencies": {
     "@changey/react-leaflet-markercluster": "^4.0.0-rc1",
     "@testing-library/jest-dom": "^5.16.4",

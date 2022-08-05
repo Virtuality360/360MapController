@@ -1,15 +1,34 @@
-const DropdownEntry = (props) => {
+import { useState } from "react"
 
-    function handleClick() {
-        console.log(props.name)
-        let style = props.name
-        props.switchStyle(style)
+const DropDownEntry = (props) => {
+    const [isActive, setIsActive] = useState(props.isActive)
+
+    const handleClick = () => {
+        if(props.type === "button") {
+            props.dispatcher( { "type": "MapStyle",
+                                "newStyle": props.name } )
+        }
+        else if(props.type === "checkbox") {
+            if(isActive) {
+                props.dispatcher( { "type": "removeOverlay",
+                                    "layer": props.name}
+                )
+            }
+            else {
+                props.dispatcher( { "type": "addOverlay",
+                                    "layer": props.name}
+                )
+            }
+        }
+        return
     }
 
     return (
-        <div onClick={handleClick} className="ddEntry">{props.name}</div>
+            <span key={props.name} onClick={handleClick}
+                className={isActive ? "dropdown-entry active" : "dropdown-entry"}>
+                {props.name}
+            </span>
     )
-
 }
 
-export default DropdownEntry
+export default DropDownEntry

@@ -1,147 +1,50 @@
-import React, { useState, useRef, useEffect } from "react";
-import { MapContainer, TileLayer, CircleMarker, GeoJSON, useMapEvents } from "react-leaflet";
-import Images from "../../PanoConfigs/demo-output.json";
-import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
+import { MapContainer, TileLayer, LayerGroup } from "react-leaflet";
+import React, { useEffect, useRef, useState } from "react";
 
-import "leaflet/dist/leaflet.css";
-// Using @changey for some bug fixes and support for newer versions
+import * as Layers from "./Layers"
+
+import * as mapStyles from "../../CONSTANTS/MapTiles"
+
 import "@changey/react-leaflet-markercluster/dist/styles.min.css";
-import "../../CSS/overrides.css";
-import * as CONSTS from "../../Constants/MapOverlays";
+import "leaflet/dist/leaflet.css";
+import "../../CSS/map.css"
 
-
-// Get geojson markers to render properly
-import L from 'leaflet';
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
-
+// Doc comments
 
 /**
- * Method to query the database
- * @todo enable functionality to filter results (parameter string)
- * @param {LatLongBounds} bounds 
- * @returns geoJSON data
+ * Displays the leaflet map
+ * @param {*} props 
+ * @returns 
  */
-async function getGeoJSON(bounds) {
-    const API_URL = "http://localhost:80/"
-    const API_PATH = `get_features/${bounds.getNorth()}/${bounds.getSouth()}/${bounds.getEast()}/${bounds.getWest()}/`
-    //const parameters:string = ''
+const Map = (props) => {
 
-    console.log(API_URL + API_PATH)
+    const mapRef = useRef()
+    const [tileLayer, setTileLayer] = useState(props.state.style)    /** Only one tilelayer at a time */
+    const [overlayLayers, setOverLayLayers] = useState([])              /** Can have multiple overlays */
+    const [center/*, setCenter*/] = useState(props.state.center)
+    const [zoom/*, setZoom*/] = useState(props.state.zoom)
 
-    const API_RESPONSE = await fetch(API_URL + API_PATH)
-    const JSON_RESPONSE = await API_RESPONSE.json()
+    // Enables Changing of the Basemap Style
+    useEffect(() => {
+        setTileLayer(props.state.style)
+    }, [props.state.style])
+
+    // Enables loading of optional overlays
+    useEffect(() => {
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher).then(result => {setOverLayLayers(result)})
+    }, [props.state.overlays])
     
-    return JSON_RESPONSE
-}
-
-/**
- * Enables use of map event handlers
- * moveend will update the bounds, causing a query to be made to the db
- * and will change the geoJSON layer
- * @param {*} props 
- * @returns null
- */
-function MapEvents(props) {
-    const map = useMapEvents({
-        click() {
-        },
-        moveend() {
-            props.setBounds(map.getBounds())
-        }
-    })
-
-    return null
-}
-
-/**
- * React component for the map
- * @param {*} props 
- * @returns The map component
- */
-const MapComp = (props) => {
-    // get a ref to the underlying L.geoJSON
-    const geoJsonRef = useRef()
-
-    const [map, setMap] = useState(null)
-    const [zoom, setZoom] = useState(3);
-    const [latLong, setLatLong] = useState([0,0]);
-    const [bounds, setBounds] = useState()
-    const [geoJSON, setGeoJSON] = useState()
-
-    let markers = [];
-
-    //reads the Pano Config JSON and gets the points for the map
-    for (const { LatLong, ImageId } of Images.Images) {
-        //defines the points as "circle" points rather than the defualt pin point
-        markers.push(
-        <CircleMarker
-        key={ImageId}
-        center={LatLong}
-        
-        eventHandlers={{
-            click: () => {
-                props.toggleMap("PanoViewer", LatLong/*, zoomLevel*/);
-                console.log("Map.js", LatLong, ImageId)
-            },
-        }}
-
-        >
-        </CircleMarker>
-        );
-    }
-
-    /**
-     * Whenever the bounds changes, query the database for new points
-     */
-    useEffect(() => {
-        // @ts-ignore
-        getGeoJSON(bounds)
-        .then((result) => setGeoJSON(result.response))
-        .catch((err) => console.log(err))
-    }, [bounds])
-
-    /**
-     * Whenver the geoJSON data changes, render the new changes
-     */
-    useEffect(() => {
-        if (geoJsonRef.current){
-            geoJsonRef.current.clearLayers()   // remove old data
-            geoJsonRef.current.addData(geoJSON) // might need to be geojson.features
-        }
-    }, [geoJsonRef, geoJSON])
-
-    /**
-     * TileLayer : Defines the map imagery to use
-     * MarkerClusterGroup : Defines how points are automatically grouped together
-     * Markers : An array of CircleMarkers
-     */
     return (
-        <MapContainer
-        className="markercluster-map"
-        center={latLong}//{latLong}
-        zoom={zoom}//{zoomLevel}
-        scrollWheelZoom={true}
-        ref={setMap}
-        style={{ height: "100%", width: "100%" }}>
-            <TileLayer
-                key={props.style}
-                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                url={CONSTS.mapOverlays[props.style]}/>
-            <MapEvents setBounds={setBounds}/>
-            <GeoJSON key={bounds} data={geoJSON} ref={geoJsonRef} />
-            <MarkerClusterGroup
-                spiderfyDistanceMultiplier={1}
-                showCoverageOnHover={false}
-                maxClusterRadius={20}>
-                    {markers}
-            </MarkerClusterGroup>
-        </MapContainer>
-    );
-};
+        <MapContainer center={center} zoom={zoom} className="map-container" ref={mapRef} >
+        <TileLayer key={tileLayer}  /** Without the key, the tile renders one step behind (useState is async? and a changed key forces a rerender) */
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={mapStyles.map_tiles[tileLayer].url}
+        />
+        <LayerGroup key={overlayLayers}>
+            {overlayLayers}
+        </LayerGroup>
+      </MapContainer>
+    )
+}
 
-export default MapComp;
+export default Map
