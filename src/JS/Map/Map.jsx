@@ -28,7 +28,8 @@ const MapComp = (props) => {
         <CircleMarker
         key={ImageId}
         center={LatLong}
-        
+        color={"#C91C1B"}
+
         eventHandlers={{
             click: () => {
                 props.toggleMap("PanoViewer", LatLong, map.getZoom());
