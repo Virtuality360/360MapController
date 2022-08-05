@@ -9,7 +9,8 @@ import "@changey/react-leaflet-markercluster/dist/styles.min.css";
 import "leaflet/dist/leaflet.css";
 import "../../CSS/map.css"
 
-// Doc comments
+// TODO : Doc comments
+// TODO : Fix race condition (it may already be fixed)
 
 /**
  * Displays the leaflet map
@@ -23,20 +24,32 @@ const Map = (props) => {
     const [overlayLayers, setOverLayLayers] = useState([])              /** Can have multiple overlays */
     const [center, setCenter] = useState(props.state.center)
     const [zoom, setZoom] = useState(props.state.zoom)
+    const [loading, setLoading] = useState(false)
 
     // Enables Changing of the Basemap Style
     useEffect(() => {
         setTileLayer(props.state.style)
+        //console.log("style")
     }, [props.state.style])
 
     // Enables loading of optional overlays
     useEffect(() => {
-        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef).then(result => {setOverLayLayers(result)})
-    }, [props.state.overlays])
+        console.log(mapRef)
+        setMapRef(mapRef)
+        let canceled = false
+        setLoading(true)
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef).then(result => {
+                                                                                                        if (!canceled) {
+                                                                                                            setOverLayLayers(result)
+                                                                                                            setLoading(false)
+                                                                                                        }
+                                                                                                        })
+        return () => (canceled = true)
+    }, [props.state.overlays, mapRef, props.dispatcher])
 
     // Somehow keeps the map refrence active
     useEffect(() => {
-        if(mapRef !== null) {console.log(mapRef.getZoom())}
+        //if(mapRef !== null) {console.log(mapRef.getZoom())}
     }, [mapRef])
     
     return (

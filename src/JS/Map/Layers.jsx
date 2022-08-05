@@ -23,12 +23,15 @@ async function gen_markers(filename, dispatcher, mapRef) {
                         json={filename}
                         eventHandlers={{
                             click: () => {
+                                if(mapRef == null) {return}
+                                else {
                                 dispatcher({"type" : "changeDisplay",
                                             "newState": "pano",
                                             "imgPath": "./Images/" + ImageId,
                                             "zoom": mapRef.getZoom(),
                                             "center": LatLong,                                        
                                             "jsonPath": filename })
+                                }
                             }
                         }} />
                 );

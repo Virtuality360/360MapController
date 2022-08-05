@@ -27,11 +27,11 @@ const PannellumHost = (props) => {
 
     useEffect(() => {               /** Fires on load */
         loadJSON(props.state.jsonPath).then(r => setJSON(r))
-    }, [])
+    }, [props.state.jsonPath])
     useEffect(() => {               /** This will fire on load and when json updates */
         if(json === null) {return}  /** so we need to make sure that json is populated */
         setHotspots(getHotspots(id, json))
-    }, [json])
+    }, [json, id])
     useEffect(() => {
         let tmp = []
         for (const hotspot of hotspots) {
@@ -49,7 +49,7 @@ const PannellumHost = (props) => {
             tmp.push(spot)
         }
         setPnlmspots(tmp)
-    }, [hotspots])
+    }, [hotspots,id,json,props])
 
     return (
         // autoload was not working in props for some reason
