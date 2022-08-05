@@ -46,11 +46,6 @@ const Map = (props) => {
                                                                                                         })
         return () => (canceled = true)
     }, [props.state.overlays, mapRef, props.dispatcher])
-
-    // Somehow keeps the map refrence active
-    useEffect(() => {
-        //if(mapRef !== null) {console.log(mapRef.getZoom())}
-    }, [mapRef])
     
     return (
         <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >
