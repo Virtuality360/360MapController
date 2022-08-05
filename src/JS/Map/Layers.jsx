@@ -7,7 +7,7 @@ import * as datapoints from "../../CONSTANTS/DataPoints"
 
 // TODO : Need to change webpack configuration to enable variable named imports
 // Or could serve them through a web server
-async function gen_markers(filename, dispatcher) {
+async function gen_markers(filename, dispatcher, mapRef) {
     let markers = []
     markers = await fetch(filename)
         .then(response => response.json())
@@ -26,7 +26,7 @@ async function gen_markers(filename, dispatcher) {
                                 dispatcher({"type" : "changeDisplay",
                                             "newState": "pano",
                                             "imgPath": "./Images/" + ImageId,
-                                            "zoom": 5,  // TODO : Change this to reflect zoom level of the map
+                                            "zoom": mapRef.getZoom(),
                                             "center": LatLong,                                        
                                             "jsonPath": filename })
                             }

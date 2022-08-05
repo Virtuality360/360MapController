@@ -40,6 +40,7 @@ var initialState = {
         "zoom": 0,
         "style": "Open Street Map",
         "overlays": [],
+        "mapRef": null,
     },
     "pannellumState": {
         "width": "100%",
@@ -68,6 +69,8 @@ const reducer = (state, action) => {
             return {...state, "mapState": {...state.mapState, "overlays": state.mapState.overlays.filter(layer => layer !== action.layer)}}
         case "movePano":
             return {...state, "pannellumState": {...state.pannellumState, "image": action.image, "pitch": action.pitch, "yaw": action.yaw, "hotspots": action.hotspots}}
+        case "updateRef":
+            return {...state, "mapState": {...state.mapState, "mapRef": action.ref}}
         case "changeDisplay":
             switch(action.newState) {
                 case "map":

@@ -36,11 +36,11 @@ function layoutParser(layout, state, dispatcher) {
         // Dropdown Inputs
         else if (entry.type.toLowerCase() === "dropdown") {
             let options = []
-            options = entry.children.map(x => <li>
+            options = entry.children.map(x => <li key={x}>
                                                 <DropDownEntry type={entry.select} name={x} dispatcher={dispatcher} 
                                                     isActive={isElementActive(x, state)} key={isElementActive(x, state)}/>
                                             </li>)
-            element =   <div className="dropdown-container menuitem">
+            element =   <div className="dropdown-container menuitem" key={entry.children}>
                             <button className="dropdown-button" >{entry.name}</button>
                                 <div className="dropdown-content">
                                     <ul className="no-bullets">
