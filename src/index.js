@@ -8,7 +8,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <V360MapController />
+    <div id="v360Container">
+        <V360MapController />
+    </div>
   </React.StrictMode>
 );
 

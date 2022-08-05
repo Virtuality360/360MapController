@@ -1,5 +1,19 @@
 # V360 - 360MapController
 
+## Use in another application
+In the element you want to place the v360MapController into,
+create a div with a width and heigth of 100%
+leaflet requires an explicit height, so a parent element must have an explicit height
+
+html: `<div id="v360"><V360MapController /></div>`
+
+css: `
+#v360 {
+    width: 100%;
+    height: 100%;
+}
+`
+
 ## Installation
 
 In the project directory, run
@@ -51,7 +65,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 Opens an electron instance that points to localhost:3000
 
-### `npm run electron:package:<target>
+### `npm run electron:package:<target>`
 
 Builds an electron instance for the target operating system.
 Can choose between "mac", "win", or "linux"
