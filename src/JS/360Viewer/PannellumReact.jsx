@@ -73,6 +73,7 @@ const PannellumReact = (props) => {
         yaw={yaw}
         hfov={110}
         autoLoad
+        compass={true}
         onLoad={() => {console.log("panorama loaded");}}
         >
             {hotspots}

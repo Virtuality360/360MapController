@@ -8,6 +8,7 @@
 {
   height: 100%;
   width:  100%;
+  overflow: hidden;
 }
 
 .marker-cluster-small {
@@ -45,18 +46,27 @@
   grid-row: 1/2;
 }
 
-.pnlm-control
+.buttonTest
 {
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-self: start;
-  justify-self: end;
   grid-column: 1/2;
   grid-row: 1/2;
 
+}
+
+.buttonPadder
+{
+  margin-top: 93px;
+  margin-left: 5px;
+
+  display:inline;
   overflow: hidden;
-  z-index: 3;
+
+  align-self: start;
+  justify-self: start;
+
+  z-index: 1;
   /* Fix Safari fullscreen bug */
   -webkit-transform: translateZ(9999px);
   transform: translateZ(9999px);
@@ -64,6 +74,7 @@
 
 .mapButton
 {
+  display:inline;
   margin-top: 4px;
   background-color: #fff;
   border: 1px solid #999;
@@ -74,4 +85,5 @@
   left: 5px;
   z-index: 2;
   height: 26px;
+  pointer-events: auto;
 }

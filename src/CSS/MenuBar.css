@@ -1,17 +1,23 @@
 .MenuBar {
     display:inline;
-    float:left;
+    float:right;
     list-style-type: none;
-    padding-left:15px;
+    /*padding-left:100px;*/
+    z-index: 3;
+    pointer-events: auto;
 }
 
+.MenuBar-container
+{
+    z-index: 401;}
+
 .SearchBar {
-    float: left;
+    float: right;
     padding: 15px;
     border-radius: 10px;
 }
 
 .Datapoints {
-    float:left;
+    float:right;
     padding:10px;
 }
