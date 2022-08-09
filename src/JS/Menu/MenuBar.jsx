@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from "react"
 
-import DropDownEntry from "./DropDownEntry"
+import DropDownEntry from "./DropdownEntry"
 import "../../CSS/MenuBar.css"
 
 function isElementActive(element, state) {
