@@ -52,7 +52,7 @@ async function gen_markers(filename, dispatcher, mapRef) {
 // Dont rebuild entire overlay array each time
 // only remove/add layers to array
 // Change to switch case
-export async function generate_overlay_layers(layers, dispatcher, mapRef) {
+export async function generate_overlay_layers(layers, dispatcher, mapRef, filters) {
     // JS wierdness, different refrences cuase inequality
     if (layers.toString() === [].toString()) {return []}
 
@@ -60,7 +60,13 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef) {
     for(const layer of layers) {
         let type = datapoints.data_points[layer].type
         if(type === "tiles") {
-            overlays.push(<TileLayer url={datapoints.data_points[layer].uri}/>)
+            let mcc = filters.mcc || 0
+            let mnc = filters.mnc || 0
+            let lac = filters.lac || 0
+            let cid = filters.cid || 0
+            let uri = datapoints.data_points[layer].uri + `?mcc=${mcc}&mnc=${mnc}&lac=${lac}&cid=${cid}`
+            console.log(mapRef.getZoom())
+            overlays.push(<TileLayer url={uri} key={uri}/>)
         }
         else if(type === "markers") {
             await gen_markers(datapoints.data_points[layer].uri, dispatcher, mapRef).then((res) => overlays.push(res))

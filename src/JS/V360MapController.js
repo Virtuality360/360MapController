@@ -55,6 +55,9 @@ var initialState = {
     },
     "menuState": {
         "menuItems": MenuItems,
+        "filters": {},
+        "filtersContent": {},
+        "selectedFilter": {},
     },
 }
 
@@ -71,6 +74,14 @@ const reducer = (state, action) => {
             return {...state, "pannellumState": {...state.pannellumState, "image": action.image, "pitch": action.pitch, "yaw": action.yaw, "hotspots": action.hotspots}}
         case "updateRef":
             return {...state, "mapState": {...state.mapState, "mapRef": action.ref}}
+        case "addFilter":
+            return {...state, "menuState": {...state.menuState, "filters": action.filters}}
+        case "removeFilter":
+            return {...state, "menuState": {...state.menuState, "filters": [], "filtersContent": []}}
+        case "populateFilter":
+            return {...state, "menuState": {...state.menuState, "filtersContent": {...state.menuState.filtersContent, [action.filter]: action.contents}}}
+        case "selectedFilter":
+            return {...state, "menuState": {...state.menuState, "selectedFilter": {...state.menuState.selectedFilter, [action.filter]: action.contents}}}
         case "changeDisplay":
             switch(action.newState) {
                 case "map":
@@ -95,15 +106,11 @@ function V360MapController(props) {
 
     const [v360State, v360Dispatcher] = useReducer(reducer, initialState)
 
-    useEffect(() => {
-
-    }, [])
-
     return (
       <div className="Virtuality360-container" >
-        <MenuBar layout={v360State.menuState.menuItems} state={v360State} dispatcher={v360Dispatcher}/>
+        <MenuBar layout={v360State.menuState} state={v360State} dispatcher={v360Dispatcher} key={v360State.menuState.filters}/>
         {/* Unpacking v360State for the key to ensure the refrence changes */}
-        {{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher} />,
+        {{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher} filters={v360State.menuState.selectedFilter}/>,
             "pano": <PannellumHost state={v360State.pannellumState} dispatcher={v360Dispatcher} key={v360State.pannellumState.image}/>,
             }[v360State.displayState] || <Map state={v360State.mapState} dispatcher={v360Dispatcher} key={{...v360State.mapState}}/>}
       </div>

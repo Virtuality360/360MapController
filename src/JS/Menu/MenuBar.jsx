@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 
 import DropDownEntry from "./DropDownEntry"
 import "../../CSS/MenuBar.css"
@@ -25,12 +25,13 @@ function layoutParser(layout, state, dispatcher) {
     // TODO : Might want to seperate each input type to its own component (text, dropdown, button , etc..)
 
     let layoutArr = []
-    for (const entry of layout) {
+    for (const entry of layout.menuItems) {
         let element = <></>
 
         // Text Inputs
         if(entry.type.toLowerCase() === "text") {
-            element = <form className="textinput-container menuitem"><input className="textinput" type={entry.type} placeholder={entry.placeholder}/></form>
+            element = <form className="textinput-container menuitem">
+                        <input className="textinput" type={entry.type} placeholder={entry.placeholder}/></form>
         }
 
         // Dropdown Inputs
@@ -52,10 +53,29 @@ function layoutParser(layout, state, dispatcher) {
 
         // Button Inputs
         else if (entry.type.toLowerCase() === "button") {
-            element = <button className="button menuitem" onClick={() => dispatcher(entry.onClick) } key={entry.name}>{entry.name}</button>
+            element = <button className="button menuitem" onClick={() => 
+                dispatcher(entry.onClick) } key={entry.name}>{entry.name}</button>
         }
         layoutArr.push(element)
     }
+
+    for(const entry in layout.filtersContent) {
+        //console.log(entry, layout.filtersContent[entry])
+        let inner = [<option value="">{entry}</option>]
+        for(const v of layout.filtersContent[entry]) {
+            //console.log(typeof v)
+            if(typeof v !== "object") {
+                inner.push(<option value={v}>{v}</option>)
+            }
+        }
+        let outer = <select name={entry} className={"filter menuitem"} onChange={(e) => dispatcher({"type": "selectedFilter",
+                                                                                                    "filter": entry,
+                                                                                                    "contents": e.target.value,})}>{inner}</select>
+        layoutArr.push(outer)
+        
+    }
+
+
     return layoutArr
 }
 
@@ -68,10 +88,20 @@ function layoutParser(layout, state, dispatcher) {
 function MenuBar(props) {
 
     const [layout, setLayout] = useState(layoutParser(props.layout, props.state, props.dispatcher))
-
     useEffect(() => {
+        console.log("filters updated")
+        for(const filter in props.layout.filters) {
+            fetch(`http://0.0.0.0:8882/get_filter/${filter}`)
+                .then(r => r.json())
+                .then(r => props.dispatcher({"type": "populateFilter",
+                                                "filter": filter,
+                                                "contents": r.response}))
+        }
+    }, [props.layout.filters])
+
+    useMemo(() => {
         setLayout(layoutParser(props.layout, props.state, props.dispatcher))
-    }, [props.state])
+    }, [props.state, props.dispatcher, props.layout.menuItems])
 
     return (
         <div className="menubar">

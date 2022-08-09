@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, LayerGroup } from "react-leaflet";
+import { MapContainer, TileLayer, LayerGroup, useMapEvents } from "react-leaflet";
 import React, { useEffect, useState } from "react";
 
 import * as Layers from "./Layers"
@@ -11,6 +11,26 @@ import "../../CSS/map.css"
 
 // TODO : Doc comments
 // TODO : Fix race condition (it may already be fixed)
+
+function MapEventLayer() {
+    const map = useMapEvents({
+        /*zoomend() {
+            console.log(map.getZoom())
+            if(map.getZoom() > 10) {
+                const bounds = map.getBounds()
+                const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
+                console.log(n,e,s,w)
+                //fetch(`http://0.0.0.0:8882/count_features/${n}/${s}/${e}/${w}/`).then(r => r.json()).then(r => console.log(r.response))
+            }
+        },*/
+        moveend() {
+            const bounds = map.getBounds()
+            const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
+            console.log(n,e,s,w)
+        }
+    })
+}
+
 
 /**
  * Displays the leaflet map
@@ -25,6 +45,7 @@ const Map = (props) => {
     const [center, setCenter] = useState(props.state.center)
     const [zoom, setZoom] = useState(props.state.zoom)
     const [loading, setLoading] = useState(false)
+    const [numElements, setNumElents] = useState(null)
 
     // Enables Changing of the Basemap Style
     useEffect(() => {
@@ -34,29 +55,30 @@ const Map = (props) => {
 
     // Enables loading of optional overlays
     useEffect(() => {
-        console.log(mapRef)
+        //console.log(mapRef)
         setMapRef(mapRef)
         let canceled = false
         setLoading(true)
-        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef).then(result => {
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, props.filters).then(result => {
                                                                                                         if (!canceled) {
                                                                                                             setOverLayLayers(result)
                                                                                                             setLoading(false)
                                                                                                         }
                                                                                                         })
         return () => (canceled = true)
-    }, [props.state.overlays, mapRef, props.dispatcher])
+    }, [props.state.overlays, mapRef, props.dispatcher, props.filters])
     
     return (
         <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >
-        <TileLayer key={tileLayer}  /** Without the key, the tile renders one step behind (useState is async? and a changed key forces a rerender) */
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url={mapStyles.map_tiles[tileLayer].url}
-        />
-        <LayerGroup key={overlayLayers}>
-            {overlayLayers}
-        </LayerGroup>
-      </MapContainer>
+            <MapEventLayer /> 
+            <TileLayer key={tileLayer}  /** Without the key, the tile renders one step behind (useState is async? and a changed key forces a rerender) */
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url={mapStyles.map_tiles[tileLayer].url}
+            />
+            <LayerGroup key={overlayLayers}>
+                {overlayLayers}
+            </LayerGroup>
+        </MapContainer>
     )
 }
 
