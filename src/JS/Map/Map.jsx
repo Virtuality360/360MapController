@@ -90,7 +90,9 @@ const MapComp = (props) => {
             <MarkerClusterGroup
             spiderfyDistanceMultiplier={1}
             showCoverageOnHover={false}
-            maxClusterRadius={20}>
+            maxClusterRadius={20}
+            disableClusteringAtZoom={15}
+            spiderfyOnMaxZoom={false}>
                 {markers}
             </MarkerClusterGroup>
             
