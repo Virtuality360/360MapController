@@ -7,7 +7,16 @@ import reportWebVitals from './JS/reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/**
+     * The leaflet map MUST go into a container with a defined height
+     * In this case, the internal leaflet map will inherit the height
+     * of the App-Container div.
+     * When importing the app into another project, ensure that hieght 
+     * is defined explicitly.
+     */}
+    <div className='App-Container'>
+        <App />
+    </div>
   </React.StrictMode>
 );
 

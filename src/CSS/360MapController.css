@@ -46,15 +46,6 @@
   grid-row: 1/2;
 }
 
-.buttonTest
-{
-  overflow: hidden;
-  display: flex;
-  grid-column: 1/2;
-  grid-row: 1/2;
-
-}
-
 .buttonPadder
 {
   margin-top: 93px;
@@ -67,6 +58,7 @@
   justify-self: start;
 
   z-index: 1;
+
   /* Fix Safari fullscreen bug */
   -webkit-transform: translateZ(9999px);
   transform: translateZ(9999px);

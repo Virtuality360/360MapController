@@ -41,10 +41,6 @@ const MapComp = (props) => {
         );
     }
 
-    function switchStyle(newStyle) {
-        setMapStyle(newStyle);
-    }
-
     //TileLayer : Defines the map imagery to use.
     //MarkerClusterGroup : Defines the use of the abilty to automaticly group up points under one larger point to increase speed of load times.
     //markers : Loads in the list of points.

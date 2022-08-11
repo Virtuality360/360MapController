@@ -5,8 +5,7 @@ import ControllerButton from "./360Viewer/PanoButton.js";
 
 import logo from '../logo.svg';
 import '../CSS/App.css';
-import "../CSS/MenuBar.css"
-import "../CSS/360MapController.css"
+import "../CSS/360MapController.css";
 
 const MapPanoController = () => {
     //loads the map
@@ -24,13 +23,10 @@ const MapPanoController = () => {
     // defines the switch component function and inputs the latlong and zoom as necessary,
     // as well as the current component (either map or panoviewer)
     function switchComponent(currentComponent, latLong, zoomLevel) {
-        console.log("sitchComponent", latLong);
         setLatLong(latLong);
         setZoomLevel(zoomLevel);
         setCurrentComponent(currentComponent);
     }
-
-    //let prop = {toggleMap : switchComponent, /*latLong : latLong, zoom : zoomLevel,*/ style : mapStyle}
 
     return (
         <div className="pnlm-wrapper App-Container"> 
@@ -41,9 +37,9 @@ const MapPanoController = () => {
                 'PanoViewer': <ControllerButton latLong={latLong} toggleMap={switchComponent} zoom={zoomLevel}/>
                 }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>}
             </div>
+
         </div>
       );
-
 }
 
 export default MapPanoController;
