@@ -18,12 +18,12 @@ const MenuBar = (props) => {
 
     return (
         <div className="MenuBar-container">
-            <ul className="MenuBar">
+            <div className="MenuBar">
                 <input className="SearchBar" type="text" placeholder="Search..."
                 value={searchQuery} onChange={e=>handleChange(e)} onKeyDown={e=>handleDown(e)} />
                 <MenuBarDropdown title="Maps" content={CONSTS.mapOverlays} switchStyle={props.switchStyle}/>
                 <li className="Datapoints">Datapoints</li>
-            </ul>
+            </div>
         </div>
     )
 }

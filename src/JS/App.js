@@ -16,6 +16,7 @@ const MapPanoController = () => {
 
     //sets the defualt zoom of the map, 3 is 3 zoom levels deep.
     const [zoomLevel, setZoomLevel] = useState(3);
+
     //sets the default map style
     const [mapStyle, setMapStyle] = useState('CartoDB Dark matter');
 
@@ -27,26 +28,18 @@ const MapPanoController = () => {
         setCurrentComponent(currentComponent);
     }
 
-    function switchStyle(newStyle) {
-        setMapStyle(newStyle);
-    }
-
-    //let prop = {toggleMap : switchComponent, /*l atLong : latLong, zoom : zoomLevel,*/ style : mapStyle}
-
     return (
-        <div className="Virtuality360-container"> 
-            <div key={currentComponent} className="Virtuality360-container">
+        <div className="pnlm-wrapper App-Container"> 
+            <div key={currentComponent} className="pnlm Virtuality360-container">
                 {/** Display the current component, if currentComponent is null, display the map */}
 
                 {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent} zoom={zoomLevel} latLong={latLong}/>,
                 'PanoViewer': <ControllerButton latLong={latLong} toggleMap={switchComponent} zoom={zoomLevel}/>
                 }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>}
-
             </div>
 
         </div>
       );
-
 }
 
 export default MapPanoController;

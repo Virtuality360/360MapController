@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { MapContainer, TileLayer, CircleMarker, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker, useMap, ZoomControl, LayersControl} from "react-leaflet";
 import Images from "../../PanoConfigs/demo-output.json";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
+
+import MenuBar from "../Menu/MenuBar.jsx";
 
 import "leaflet/dist/leaflet.css";
 // Using @changey for some bug fixes and support for newer versions
@@ -18,6 +20,7 @@ const MapComp = (props) => {
     const [latLong, setLatLong] = useState(props.latLong);
     const [bounds, setBounds] = useState()
     const [geoJSON, setGeoJSON] = useState()
+    const [mapStyle, setMapStyle] = useState('CartoDB Dark matter');
 
     let markers = [];
 
@@ -29,13 +32,11 @@ const MapComp = (props) => {
         key={ImageId}
         center={LatLong}
         color={"#C91C1B"}
-
         eventHandlers={{
             click: () => {
                 props.toggleMap("PanoViewer", LatLong, map.getZoom());
             },
         }}>
-
         </CircleMarker>
         );
     }
@@ -48,21 +49,49 @@ const MapComp = (props) => {
         className="Virtuality360-container"
         center={latLong}
         zoom={zoom}
+        zoomControl={false}
         scrollWheelZoom={true}
         ref={setMap}>
-            {/** The map to use */}
-            <TileLayer
-            key={props.style}
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url={CONSTS.mapOverlays[props.style]}/>
+            <div class="leaflet-top leaflet-left">
+                <ZoomControl/>
+            </div>
+            <LayersControl position="topleft">
+                <LayersControl.BaseLayer checked name="OpenStreetMap">
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="CartoDB Positron">
+                    <TileLayer
+                      url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+                      attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="CartoDB Dark matter">
+                    <TileLayer
+                      url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+                      attribution="&copy; <a href=&quot;https://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors"
+                    />
+                </LayersControl.BaseLayer>
+              <LayersControl.BaseLayer name="NASA Gibs Blue Marble">
+                <TileLayer
+                  url="https://gibs-{s}.earthdata.nasa.gov/wmts/epsg3857/best/BlueMarble_ShadedRelief_Bathymetry/default//EPSG3857_500m/{z}/{y}/{x}.jpeg"
+                  attribution="&copy; NASA Blue Marble, image service by OpenGeo"
+                  maxNativeZoom={8}
+                />
+                </LayersControl.BaseLayer>
+           </LayersControl>
             {/** Set up the markers */}
             <MarkerClusterGroup
             spiderfyDistanceMultiplier={1}
             showCoverageOnHover={false}
-            maxClusterRadius={20}>
+            maxClusterRadius={20}
+            disableClusteringAtZoom={15}
+            spiderfyOnMaxZoom={false}>
                 {markers}
-
             </MarkerClusterGroup>
+            
         </MapContainer>
     );
 };

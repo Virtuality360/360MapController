@@ -20,7 +20,7 @@ const ControllerButton = (props) => {
         <div className="pnlm Virtuality360-container">
           <PannellumReact latLong={props.latLong} zoom={props.zoom} />
         </div>
-        <div className="pnlm-control">
+        <div className="pnlm buttonPadder">
           <button className="map-button" onClick={handleClick}>Map</button>
         </div>
     </div>
