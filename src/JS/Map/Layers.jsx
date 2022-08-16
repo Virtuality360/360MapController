@@ -60,11 +60,11 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef, filter
     for(const layer of layers) {
         let type = datapoints.data_points[layer].type
         if(type === "tiles") {
-            let mcc = filters.mcc || 0
+            /*let mcc = filters.mcc || 0
             let mnc = filters.mnc || 0
             let lac = filters.lac || 0
-            let cid = filters.cid || 0
-            let uri = datapoints.data_points[layer].uri + `?mcc=${mcc}&mnc=${mnc}&lac=${lac}&cid=${cid}`
+            let cid = filters.cid || 0*/
+            let uri = datapoints.data_points[layer].uri //+ `?mcc=${mcc}&mnc=${mnc}&lac=${lac}&cid=${cid}`
             console.log(mapRef.getZoom())
             overlays.push(<TileLayer url={uri} key={uri}/>)
         }

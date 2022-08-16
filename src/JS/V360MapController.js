@@ -79,7 +79,8 @@ const reducer = (state, action) => {
         case "removeFilter":
             return {...state, "menuState": {...state.menuState, "filters": [], "filtersContent": []}}
         case "populateFilter":
-            return {...state, "menuState": {...state.menuState, "filtersContent": {...state.menuState.filtersContent, [action.filter]: action.contents}}}
+            console.log(action.contents[action.filter])
+            return {...state, "menuState": {...state.menuState, "filtersContent": {...state.menuState.filtersContent, [action.filter]: action.contents[action.filter]}}}
         case "selectedFilter":
             return {...state, "menuState": {...state.menuState, "selectedFilter": {...state.menuState.selectedFilter, [action.filter]: action.contents}}}
         case "changeDisplay":

@@ -91,11 +91,11 @@ function MenuBar(props) {
     useEffect(() => {
         console.log("filters updated")
         for(const filter in props.layout.filters) {
-            fetch(`http://0.0.0.0:8882/get_filter/${filter}`)
+            fetch(`http://0.0.0.0:8882/filters/gsm_qp`)
                 .then(r => r.json())
                 .then(r => props.dispatcher({"type": "populateFilter",
                                                 "filter": filter,
-                                                "contents": r.response}))
+                                                "contents": r.result}))
         }
     }, [props.layout.filters])
 
