@@ -1,5 +1,6 @@
-import { MapContainer, TileLayer, LayerGroup, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON } from "react-leaflet";
 import React, { useEffect, useState } from "react";
+import L from "leaflet"
 
 import * as Layers from "./Layers"
 
@@ -8,6 +9,15 @@ import * as mapStyles from "../../CONSTANTS/MapTiles"
 import "@changey/react-leaflet-markercluster/dist/styles.min.css";
 import "leaflet/dist/leaflet.css";
 import "../../CSS/map.css"
+
+
+delete L.Icon.Default.prototype._getIconUrl
+
+L.Icon.Default.mergeOptions ({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+})
 
 // TODO : Doc comments
 // TODO : Fix race condition (it may already be fixed)
@@ -47,6 +57,8 @@ const Map = (props) => {
     const [loading, setLoading] = useState(false)
     const [numElements, setNumElents] = useState(null)
 
+    
+
     // Enables Changing of the Basemap Style
     useEffect(() => {
         setTileLayer(props.state.style)
@@ -77,6 +89,7 @@ const Map = (props) => {
             />
             <LayerGroup key={overlayLayers}>
                 {overlayLayers}
+                
             </LayerGroup>
         </MapContainer>
     )
