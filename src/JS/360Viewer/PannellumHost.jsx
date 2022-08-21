@@ -44,7 +44,7 @@ const PannellumHost = (props) => {
                             yaw={hotspot.Yaw}
                             key={hotspot.Path}
                             handleClick={() => props.dispatcher({   "type": "movePano",
-                                                                    "image": "./Images/" + hotspot.Path,
+                                                                    "imgPath": "./Images/" + hotspot.Path,
                                                                     "pitch": hotspot.Pitch,
                                                                     "yaw": hotspot.Yaw,
                                                                     "hotspots": getHotspots(id, json),

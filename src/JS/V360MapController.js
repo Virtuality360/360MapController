@@ -10,9 +10,9 @@ import '../CSS/v360MapController.css'
 
 
 const reducer = (state, action) => {
+    console.log("Hitting v360MapController Reducer with: ", action)
     switch(action.type) {
         case "updateMenu":
-            //console.log([...action.payload.DataPoints])
             let containsFilterable = null
             if (filterable.filterable.some(x => [...action.payload.DataPoints].includes(x))){
                 containsFilterable = true
@@ -20,7 +20,19 @@ const reducer = (state, action) => {
             else {
                 containsFilterable = false
             }
-            return {...state, "mapState": {...state.mapState, "style": action.payload.Map.values().next().value, "overlays": [...action.payload.DataPoints], "filters": action.payload.filters}, "menuState": {...state.menuState, "active": action.payload, "filterable": containsFilterable}}
+            return {...state,
+                    "mapState": {...state.mapState, "style": action.payload.Map.values().next().value, "overlays": [...action.payload.DataPoints], "filters": action.payload.filters},
+                    "menuState": {...state.menuState, "active": action.payload, "filterable": containsFilterable}
+                    }
+        case "changeDisplay":
+            return {...state, "displayState": action.newState,
+                    "pannellumState": {...state.pannellumState, "image": action.imgPath, "jsonPath": action.jsonPath},
+                    "mapState": {...state.mapState, "center": action.center, "zoom": action.zoom,},
+                    }
+        case "movePano":
+            return {...state,
+                    "pannellumState": {...state.pannellumState, "image": action.imgPath, "pitch": action.pitch, "yaw": action.yaw}
+                    }
         default:
             return state
     }
@@ -35,9 +47,9 @@ function V360MapController(props) {
       <div className="Virtuality360-container" >
         <MenuBar state={v360State.menuState} dispatcher={v360Dispatcher} key={v360State.menuState.active}/>
         {/* Unpacking v360State for the key to ensure the refrence changes */}
-        {/*{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher} filters={v360State.menuState.selectedFilter}/>,
+        {{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher} filters={v360State.menuState.selectedFilter}/>,
             "pano": <PannellumHost state={v360State.pannellumState} dispatcher={v360Dispatcher} key={v360State.pannellumState.image}/>,
-            }[v360State.displayState] || <Map state={v360State.mapState} dispatcher={v360Dispatcher} key={{...v360State.mapState}}/>*/}
+            }[v360State.displayState] || <Map state={v360State.mapState} dispatcher={v360Dispatcher} key={{...v360State.mapState}}/>}
       </div>
     );
 }
