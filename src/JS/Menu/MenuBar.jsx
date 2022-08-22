@@ -10,6 +10,7 @@ import * as filterable from "../../CONSTANTS/DataPoints"
 
 function layoutParser(state, dispatcher) {
     let layoutArr = []
+    console.log(state.menuItems)
     for (const entry of state.menuItems) {
         let element = <></>
 
@@ -19,6 +20,9 @@ function layoutParser(state, dispatcher) {
                 break
             case "multi":
                 layoutArr.push(<Multi type={"DataPoints"} name={"DataPoints"} children={entry.children} active={state.active.DataPoints} dispatcher={dispatcher} key={entry.children}/>)
+                break
+            case "button":
+                layoutArr.push(<button className="button menuitem" onClick={() => (dispatcher({"type": "toParent", "payload": {"type": "changeDisplay", "newState": "map"}})) } key={entry.name}>{entry.name}</button>)
                 break
         }
     }
@@ -30,17 +34,23 @@ function layoutParser(state, dispatcher) {
     return layoutArr
 }
 
-const reducer = (state, action) => {
-    //console.log("Hitting reducer with: " , action)
-    return {...state, ...action.payload}
-}
 
 function MenuBar(props) {
+
+    const reducer = (state, action) => {
+        console.log("mb: ", action)
+        if(action.type === "toParent") {
+            props.dispatcher(action.payload)
+        }
+        return {...state, ...action.payload}
+    }
+
     const [initialState] = useState(props.state)
     const [menuBarState, menuBarDispatcher] = useReducer(reducer, props.state.active)
     const [layout, setLayout] = useState(layoutParser(initialState, menuBarDispatcher))
 
     useEffect(() => {
+        console.log("mbs: ", menuBarState)
         props.dispatcher({
             "type": "updateMenu",
             "payload": menuBarState

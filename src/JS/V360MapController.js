@@ -25,10 +25,19 @@ const reducer = (state, action) => {
                     "menuState": {...state.menuState, "active": action.payload, "filterable": containsFilterable}
                     }
         case "changeDisplay":
-            return {...state, "displayState": action.newState,
-                    "pannellumState": {...state.pannellumState, "image": action.imgPath, "jsonPath": action.jsonPath},
-                    "mapState": {...state.mapState, "center": action.center, "zoom": action.zoom,},
-                    }
+            switch(action.newState) {
+                case "map":
+                    return {...state, "displayState": action.newState,
+                            "menuState": {...state.menuState, "menuItems": initialState.initialState.menuState.menuItems }
+                        }
+                case "pano":
+                    return {...state, "displayState": action.newState,
+                        "pannellumState": {...state.pannellumState, "image": action.imgPath, "jsonPath": action.jsonPath},
+                        "mapState": {...state.mapState, "center": action.center, "zoom": action.zoom,},
+                        "menuState": {...state.menuState, "menuItems": [...state.menuState.menuItems, ...initialState.panoButton]},
+                        }
+            }
+            
         case "movePano":
             return {...state,
                     "pannellumState": {...state.pannellumState, "image": action.imgPath, "pitch": action.pitch, "yaw": action.yaw}

@@ -14,7 +14,7 @@ const MenuItems = [
     },
 ]
 
-const panoButton = [{"name": "Back",
+export const panoButton = [{"name": "Back",
 "type": "button",
 "onClick": {"type": "changeDisplay",
             "newState": "map"}
