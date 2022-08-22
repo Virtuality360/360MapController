@@ -1,9 +1,21 @@
-import { CircleMarker, TileLayer } from "react-leaflet";
+import { CircleMarker, TileLayer, GeoJSON } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 
 import * as datapoints from "../../CONSTANTS/DataPoints"
 
 // TODO : Doc Comments
+const onDP = (feature, layer) => {
+    
+    layer.on({
+        'mouseover': (e) => {
+            console.log(feature)
+          layer.bindTooltip(`MCC: ${feature.properties.mcc}\nMNC: ${feature.properties.mnc}\nLAC: ${feature.properties.lac}\nCID: ${feature.properties.cid}`).openTooltip();
+        },
+        'mouseout': () => {
+          layer.unbindTooltip().closeTooltip();
+        },
+      });
+}
 
 // TODO : Need to change webpack configuration to enable variable named imports
 // Or could serve them through a web server
@@ -52,25 +64,26 @@ async function gen_markers(filename, dispatcher, mapRef) {
 // Dont rebuild entire overlay array each time
 // only remove/add layers to array
 // Change to switch case
-export async function generate_overlay_layers(layers, dispatcher, mapRef, filters) {
+export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters, numElements) {
     // JS wierdness, different refrences cuase inequality
     if (layers.toString() === [].toString()) {return []}
 
     let overlays = []
     for(const layer of layers) {
         let type = datapoints.data_points[layer].type
-        if(type === "tiles") {
-            /*let mcc = filters.mcc || 0
-            let mnc = filters.mnc || 0
-            let lac = filters.lac || 0
-            let cid = filters.cid || 0*/
-            let uri = datapoints.data_points[layer].uri //+ `?mcc=${mcc}&mnc=${mnc}&lac=${lac}&cid=${cid}`
-            console.log(mapRef.getZoom())
-            overlays.push(<TileLayer url={uri} key={uri}/>)
-        }
-        else if(type === "markers") {
+        if(type === "markers") {
             await gen_markers(datapoints.data_points[layer].uri, dispatcher, mapRef).then((res) => overlays.push(res))
         }
+        else if(type === "tiles") {
+            const uri = datapoints.data_points[layer].uri
+            if (numElements >= 5000) {
+                overlays.push(<TileLayer url={uri + queryParameters} key={uri + queryParameters}/>)
+            }
+            else {
+                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={"geoJSON"} onEachFeature={onDP}/>)})
+            }
+        }
     }
+    console.log(overlays)
     return overlays
 }

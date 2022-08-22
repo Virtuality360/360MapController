@@ -10,7 +10,7 @@ import '../CSS/v360MapController.css'
 
 
 const reducer = (state, action) => {
-    console.log("Hitting v360MapController Reducer with: ", action)
+    //console.log("Hitting v360MapController Reducer with: ", action)
     switch(action.type) {
         case "updateMenu":
             let containsFilterable = null
@@ -50,13 +50,12 @@ const reducer = (state, action) => {
 function V360MapController(props) {
 
     const [v360State, v360Dispatcher] = useReducer(reducer, initialState.initialState)
-    //console.log(v360State.menuState.active)
 
     return (
       <div className="Virtuality360-container" >
         <MenuBar state={v360State.menuState} dispatcher={v360Dispatcher} key={v360State.menuState.active}/>
         {/* Unpacking v360State for the key to ensure the refrence changes */}
-        {{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher} filters={v360State.menuState.selectedFilter}/>,
+        {{  "map": <Map state={v360State.mapState} dispatcher={v360Dispatcher}/>,
             "pano": <PannellumHost state={v360State.pannellumState} dispatcher={v360Dispatcher} key={v360State.pannellumState.image}/>,
             }[v360State.displayState] || <Map state={v360State.mapState} dispatcher={v360Dispatcher} key={{...v360State.mapState}}/>}
       </div>

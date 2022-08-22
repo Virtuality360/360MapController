@@ -10,7 +10,7 @@ import * as filterable from "../../CONSTANTS/DataPoints"
 
 function layoutParser(state, dispatcher) {
     let layoutArr = []
-    console.log(state.menuItems)
+    //console.log(state.menuItems)
     for (const entry of state.menuItems) {
         let element = <></>
 
@@ -38,7 +38,7 @@ function layoutParser(state, dispatcher) {
 function MenuBar(props) {
 
     const reducer = (state, action) => {
-        console.log("mb: ", action)
+        //console.log("mb: ", action)
         if(action.type === "toParent") {
             props.dispatcher(action.payload)
         }
@@ -50,7 +50,7 @@ function MenuBar(props) {
     const [layout, setLayout] = useState(layoutParser(initialState, menuBarDispatcher))
 
     useEffect(() => {
-        console.log("mbs: ", menuBarState)
+        //console.log("mbs: ", menuBarState)
         props.dispatcher({
             "type": "updateMenu",
             "payload": menuBarState

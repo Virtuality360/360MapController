@@ -22,24 +22,17 @@ L.Icon.Default.mergeOptions ({
 // TODO : Doc comments
 // TODO : Fix race condition (it may already be fixed)
 
-function MapEventLayer() {
-    const map = useMapEvents({
-        /*zoomend() {
-            console.log(map.getZoom())
-            if(map.getZoom() > 10) {
-                const bounds = map.getBounds()
-                const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
-                console.log(n,e,s,w)
-                //fetch(`http://0.0.0.0:8882/count_features/${n}/${s}/${e}/${w}/`).then(r => r.json()).then(r => console.log(r.response))
-            }
-        },*/
-        moveend() {
-            const bounds = map.getBounds()
-            const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
-            console.log(n,e,s,w)
-        }
-    })
+function buildQueryParameters(bounds, filters) {
+    let queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
+    for ( const prop in filters) {
+        if(filters[prop].size === 0) continue
+        queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
+    }
+
+    return queryParameters
 }
+
+
 
 
 /**
@@ -55,30 +48,48 @@ const Map = (props) => {
     const [center, setCenter] = useState(props.state.center)
     const [zoom, setZoom] = useState(props.state.zoom)
     const [loading, setLoading] = useState(false)
-    const [numElements, setNumElents] = useState(null)
+    const [numElements, setNumElements] = useState(Number.MAX_VALUE)
+
+    const [bounds, setBounds] = useState([])
+    const [queryParameters, setQueryParameters] = useState("")
 
     
+
+    function MapEventLayer() {
+        const map = useMapEvents({
+            moveend() {
+                const bounds = map.getBounds()
+                const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
+                setBounds([n,s,e,w])    
+                fetch(`http://localhost:8882/count/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => setNumElements(r.result[0][0]))
+            }
+        })
+    }
+
+
 
     // Enables Changing of the Basemap Style
     useEffect(() => {
         setTileLayer(props.state.style)
-        //console.log("style")
     }, [props.state.style])
+
+    useEffect(() => {
+        setQueryParameters(buildQueryParameters(bounds, props.state.filters))
+    }, [bounds, props.state.filters])
 
     // Enables loading of optional overlays
     useEffect(() => {
-        //console.log(mapRef)
         setMapRef(mapRef)
         let canceled = false
         setLoading(true)
-        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, props.filters).then(result => {
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters, numElements).then(result => {
                                                                                                         if (!canceled) {
                                                                                                             setOverLayLayers(result)
                                                                                                             setLoading(false)
                                                                                                         }
                                                                                                         })
         return () => (canceled = true)
-    }, [props.state.overlays, mapRef, props.dispatcher, props.filters])
+    }, [props.state.overlays, mapRef, props.dispatcher, props.filters, numElements])
     
     return (
         <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >
@@ -88,8 +99,7 @@ const Map = (props) => {
               url={mapStyles.map_tiles[tileLayer].url}
             />
             <LayerGroup key={overlayLayers}>
-                {overlayLayers}
-                
+                {overlayLayers}         
             </LayerGroup>
         </MapContainer>
     )
