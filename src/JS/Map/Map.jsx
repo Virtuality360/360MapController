@@ -22,8 +22,11 @@ L.Icon.Default.mergeOptions ({
 // TODO : Doc comments
 // TODO : Fix race condition (it may already be fixed)
 
-function buildQueryParameters(bounds, filters) {
-    let queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
+function buildQueryParameters(bounds, filters = {}) {
+    let queryParameters = ""
+    if(bounds) {
+        queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
+    }
     for ( const prop in filters) {
         if(filters[prop].size === 0) continue
         queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
@@ -47,13 +50,9 @@ const Map = (props) => {
     const [overlayLayers, setOverLayLayers] = useState([])              /** Can have multiple overlays */
     const [center, setCenter] = useState(props.state.center)
     const [zoom, setZoom] = useState(props.state.zoom)
-    const [loading, setLoading] = useState(false)
-    const [numElements, setNumElements] = useState(Number.MAX_VALUE)
 
-    const [bounds, setBounds] = useState([])
+    const [bounds, setBounds] = useState([90,-90,180,-180])
     const [queryParameters, setQueryParameters] = useState("")
-
-    
 
     function MapEventLayer() {
         const map = useMapEvents({
@@ -61,12 +60,9 @@ const Map = (props) => {
                 const bounds = map.getBounds()
                 const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
                 setBounds([n,s,e,w])    
-                fetch(`http://localhost:8882/count/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => setNumElements(r.result[0][0]))
             }
         })
     }
-
-
 
     // Enables Changing of the Basemap Style
     useEffect(() => {
@@ -81,15 +77,16 @@ const Map = (props) => {
     useEffect(() => {
         setMapRef(mapRef)
         let canceled = false
-        setLoading(true)
-        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters, numElements).then(result => {
+        //setLoading(true)
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters).then(result => {
                                                                                                         if (!canceled) {
                                                                                                             setOverLayLayers(result)
-                                                                                                            setLoading(false)
+                                                                                                            //setLoading(false)
                                                                                                         }
                                                                                                         })
+        //console.log("layers updated")
         return () => (canceled = true)
-    }, [props.state.overlays, mapRef, props.dispatcher, props.filters, numElements])
+    }, [props.state.overlays, mapRef, props.dispatcher, props.filters, queryParameters])
     
     return (
         <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >

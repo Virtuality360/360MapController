@@ -28,7 +28,7 @@ function layoutParser(state, dispatcher) {
     }
 
     if(state.filterable) {
-        layoutArr.push(<Filters dispatcher={dispatcher}/>)
+        layoutArr.push(<Filters dispatcher={dispatcher} key={"filters"}/>)
     }
 
     return layoutArr

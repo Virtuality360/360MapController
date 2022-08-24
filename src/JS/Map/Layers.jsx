@@ -1,5 +1,6 @@
 import { CircleMarker, TileLayer, GeoJSON } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
+import RFHost from "./RFHost";
 
 import * as datapoints from "../../CONSTANTS/DataPoints"
 
@@ -8,7 +9,7 @@ const onDP = (feature, layer) => {
     
     layer.on({
         'mouseover': (e) => {
-            console.log(feature)
+            //console.log(feature)
           layer.bindTooltip(`MCC: ${feature.properties.mcc}\nMNC: ${feature.properties.mnc}\nLAC: ${feature.properties.lac}\nCID: ${feature.properties.cid}`).openTooltip();
         },
         'mouseout': () => {
@@ -64,7 +65,7 @@ async function gen_markers(filename, dispatcher, mapRef) {
 // Dont rebuild entire overlay array each time
 // only remove/add layers to array
 // Change to switch case
-export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters, numElements) {
+export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters) {
     // JS wierdness, different refrences cuase inequality
     if (layers.toString() === [].toString()) {return []}
 
@@ -75,15 +76,16 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef, queryP
             await gen_markers(datapoints.data_points[layer].uri, dispatcher, mapRef).then((res) => overlays.push(res))
         }
         else if(type === "tiles") {
-            const uri = datapoints.data_points[layer].uri
+            overlays.push(<RFHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
+            /*const uri = datapoints.data_points[layer].uri
             if (numElements >= 5000) {
                 overlays.push(<TileLayer url={uri + queryParameters} key={uri + queryParameters}/>)
-            }
-            else {
-                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={"geoJSON"} onEachFeature={onDP}/>)})
-            }
+            }*/
+            /*else {
+                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={r.response} onEachFeature={onDP}/>)})
+            }*/
         }
     }
-    console.log(overlays)
+    //console.log(overlays)
     return overlays
 }
