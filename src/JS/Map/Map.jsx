@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON } from "react-leaflet";
+import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON, Popup } from "react-leaflet";
 import React, { useEffect, useState } from "react";
 import L from "leaflet"
 
@@ -22,12 +22,15 @@ L.Icon.Default.mergeOptions ({
 // TODO : Doc comments
 // TODO : Fix race condition (it may already be fixed)
 
-function buildQueryParameters(bounds, filters) {
-    let queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
-    for ( const prop in filters) {
-        if(filters[prop].size === 0) continue
-        queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
+function buildQueryParameters(bounds, filters = {}) {
+    let queryParameters = ""
+    if(bounds) {
+        queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
     }
+    // for ( const prop in filters) {
+    //     if(filters[prop].size === 0) continue
+    //     queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
+    // }
 
     return queryParameters
 }

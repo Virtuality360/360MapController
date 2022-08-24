@@ -11,6 +11,9 @@ export const data_points = {
                 "uri" : PANO_DIR + "demo-output-1.json"},
     "PANO 3" : { "type" : "markers",
                 "uri" : PANO_DIR + "demo-output-2.json"},
+    "PANO TEST" : { "type" : "GeoJSON",
+                    "uri" : "http://0.0.0.0:8882/get-JSON/v360_exif_data",
+                    "database": "v360_exif_data"},
 }
 
 export const filterable = ["GSM Radio Frequencies"]
