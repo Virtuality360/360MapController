@@ -9,8 +9,9 @@ function buildQueryParametersFiltersOnly(filters) {
     let queryParameters = "?"
     for ( const prop in filters) {
         if(filters[prop].size === 0) continue
-        queryParameters += Array.from(filters[prop]).map(x => `${prop}=${x}`).join('&')
+        queryParameters += Array.from(filters[prop]).map(x => `${prop}=${x}`).join('&') + '&'
     }
+    queryParameters = queryParameters.slice(0, -1)  /** Remove the trailing '&' */
     return queryParameters
 }
 
