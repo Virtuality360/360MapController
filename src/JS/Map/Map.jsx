@@ -83,7 +83,6 @@ const Map = (props) => {
 
     // Enables loading of optional overlays
     useEffect(() => {
-        //setMapRef(mapRef)   /** Ensure that the map refrence is set */
         let active = true   /** Used to determine if the call is still live */
         generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters).then(result => {
                                                                                                         if (active) {
