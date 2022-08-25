@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, LayerGroup, useMapEvents } from "react-leaflet";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import L from "leaflet"
 
 import generate_overlay_layers from "./Layers"
@@ -47,7 +47,8 @@ function buildQueryParameters(bounds, filters = {}) {
  */
 const Map = (props) => {
 
-    const [mapRef, setMapRef] = useState(props.state.mapRef)
+    const mapRef = useRef(props.state.mapRef)
+    const baseTileRef = useRef(null)
     const [tileLayer, setTileLayer] = useState(props.state.style)    /** Only one tilelayer at a time */
     const [overlayLayers, setOverLayLayers] = useState([])              /** Can have multiple overlays */
     const [center, setCenter] = useState(props.state.center)
@@ -82,7 +83,7 @@ const Map = (props) => {
 
     // Enables loading of optional overlays
     useEffect(() => {
-        setMapRef(mapRef)   /** Ensure that the map refrence is set */
+        //setMapRef(mapRef)   /** Ensure that the map refrence is set */
         let active = true   /** Used to determine if the call is still live */
         generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters).then(result => {
                                                                                                         if (active) {
@@ -91,11 +92,17 @@ const Map = (props) => {
                                                                                                         })
         return () => (active = false)
     }, [props.state.overlays, mapRef, props.dispatcher, props.filters, queryParameters])
+
+    useEffect(() => {
+        if(baseTileRef.current) {
+            baseTileRef.current.setUrl(mapStyles.map_tiles[tileLayer].url)
+        }
+    }, [tileLayer])
     
     return (
-        <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >
+        <MapContainer center={center} zoom={zoom} className="map-container" ref={mapRef} >
             <MapEventLayer /> 
-            <TileLayer key={tileLayer}  /** Without the key, the tile renders one step behind (useState is async? and a changed key forces a rerender) TODO: bad practice*/
+            <TileLayer ref={baseTileRef} /** Without the key, the tile renders one step behind (useState is async? and a changed key forces a rerender) TODO: bad practice*/
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url={mapStyles.map_tiles[tileLayer].url}
             />

@@ -30,12 +30,12 @@ async function gen_markers(filename, dispatcher, mapRef) {
                         json={filename}
                         eventHandlers={{
                             click: () => {
-                                if(mapRef == null) {return}
+                                if(!mapRef.current) {return}
                                 else {
                                 dispatcher({"type" : "changeDisplay",
                                             "newState": "pano",
                                             "imgPath": "./Images/" + ImageId,
-                                            "zoom": mapRef.getZoom(),
+                                            "zoom": mapRef.current.getZoom(),
                                             "center": LatLong,                                        
                                             "jsonPath": filename })
                                 }
