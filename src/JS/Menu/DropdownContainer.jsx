@@ -1,3 +1,8 @@
+/**
+ * A component that holds dropdown entries
+ * @param {*} props options => array of dropdownentries
+ * @returns A react component
+ */
 const DropdownContainer = (props) => {
     return (
         <div className="dropdown-container menuitem" key={props.children}>

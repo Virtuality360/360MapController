@@ -1,11 +1,18 @@
-import { useEffect } from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-import * as datapoints from "../../CONSTANTS/DataPoints"
-
+/**
+ * Create a entry for a dropdown
+ * @param {*} props 
+ * @returns a react component
+ */
 const DropDownEntry = (props) => {
     const [isActive, setIsActive] = useState(props.isActive)
 
+    /**
+     * Switch the active state of this component
+     * Update the parent element
+     * @returns null
+     */
     const handleClick = () => {
         setIsActive(!isActive)
         props.dispatcher( {"filter": props.container,
@@ -14,6 +21,9 @@ const DropDownEntry = (props) => {
         return
     }
 
+    /**
+     * Keep state up to date with parent
+     */
     useEffect(() => {
         setIsActive(props.isActive)
     }, [props.isActive])

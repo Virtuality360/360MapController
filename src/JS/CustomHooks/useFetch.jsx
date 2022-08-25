@@ -8,6 +8,7 @@ import React, { useState, useEffect } from "react"
  *  
  * @param {*} url Defines the resource that you wish to fetch. Can be any object with a stringifier, or a Request object
  * @param {*} options An object containing any custom settings that you want to apply to the request
+ * @param {*} dependencies An array of objects that wich will cause this hook to update when changed
  * @returns the response, error state, and loading state
  */
 const useFetch = (url, options = {}, dependencies = []) => {
@@ -45,6 +46,7 @@ const useFetch = (url, options = {}, dependencies = []) => {
 
         doFetch()
 
+        /** When demounting, abort the fetch request */
         return () => {
             abortController.abort()
         }

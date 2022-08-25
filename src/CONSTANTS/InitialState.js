@@ -36,7 +36,6 @@ export const initialState = {
         "pitch": 0,
         "yaw": 0,
         "hfov": 110,
-        "hotspots": [],
         "jsonPath": "",
         //"onLoad": () => {console.log("panorama loaded")},
     },

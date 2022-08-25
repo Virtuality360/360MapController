@@ -1,19 +1,19 @@
-import { useEffect, useState, useMemo, useReducer } from "react"
+import { useEffect, useState, useReducer } from "react"
 
-import DropDownEntry from "./DropdownEntry"
 import Single from "./Single"
 import Multi from "./Multi"
 import Filters from "./Filters"
+
 import "../../CSS/MenuBar.css"
-import * as filterable from "../../CONSTANTS/DataPoints"
-
-
+/**
+ * Generate the components top display on the menubar
+ * @param {*} state Current state of the menubar
+ * @param {*} dispatcher allows communication with the dispatcher
+ * @returns an array of components
+ */
 function layoutParser(state, dispatcher) {
     let layoutArr = []
-    //console.log(state.menuItems)
     for (const entry of state.menuItems) {
-        let element = <></>
-
         switch(entry.type.toLowerCase()) {
             case "single":
                 layoutArr.push(<Single type={"Map"} name={"Map"} children={entry.children} active={state.active.Map} dispatcher={dispatcher} key={entry.children}/>)
@@ -27,6 +27,8 @@ function layoutParser(state, dispatcher) {
         }
     }
 
+    // If there is a filterable option available
+    // Add the filters to the end of the menu
     if(state.filterable) {
         layoutArr.push(<Filters dispatcher={dispatcher} key={"filters"}/>)
     }
@@ -34,11 +36,16 @@ function layoutParser(state, dispatcher) {
     return layoutArr
 }
 
-
+/**
+ * Generate the menubar
+ * @param {*} props properites
+ * @returns the menubar
+ */
 function MenuBar(props) {
 
+    /** Keep state updated with parent */
+    // TODO : Fix Warning: Cannot update a component (`V360MapController`) while rendering a different component (`MenuBar`)
     const reducer = (state, action) => {
-        //console.log("mb: ", action)
         if(action.type === "toParent") {
             props.dispatcher(action.payload)
         }
@@ -49,14 +56,18 @@ function MenuBar(props) {
     const [menuBarState, menuBarDispatcher] = useReducer(reducer, props.state.active)
     const [layout, setLayout] = useState(layoutParser(initialState, menuBarDispatcher))
 
+    /**
+     * Whenever the state of the menubar changes,
+     * update the controller
+     */
     useEffect(() => {
-        //console.log("mbs: ", menuBarState)
         props.dispatcher({
             "type": "updateMenu",
             "payload": menuBarState
         })
     }, [menuBarState])
 
+    /** Keep the layout up to date with the controller */
     useEffect(() => {
         setLayout(layoutParser(props.state, menuBarDispatcher))
     }, [props.state])

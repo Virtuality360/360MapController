@@ -1,15 +1,16 @@
-import { hover } from "@testing-library/user-event/dist/hover";
-import { geoJSON } from "leaflet";
-import { useEffect } from "react";
-import { useState } from "react"
-import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON } from "react-leaflet";
+import { useEffect, useState } from "react";
+import { TileLayer, GeoJSON } from "react-leaflet";
 import useFetch from "../CustomHooks/useFetch";
 
+/**
+ * Enables for a tooltip to be generated when hovering over a feature
+ * @param {*} feature the feature the user is hovering over
+ * @param {*} layer the element to bind to
+ */
 const hoverGeoJSON = (feature, layer) => {
     layer.on({
-        'mouseover': (e) => {
-            console.log(feature)
-            layer.bindTooltip("tooltip text").openTooltip();
+        'mouseover': () => {
+            layer.bindTooltip(`MCC: ${feature.properties.mcc}\nMNC: ${feature.properties.mnc}\nLAC: ${feature.properties.lac}\nCID: ${feature.properties.cid}`).openTooltip();
         },
         'mouseout': () => {
             layer.unbindTooltip().closeTooltip();
@@ -17,19 +18,29 @@ const hoverGeoJSON = (feature, layer) => {
       });
 }
 
+/**
+ * Based on the number of points in frame, determine whether to diplay the points as a raster or geojson
+ * @param {int} count how many points are on the screen
+ * @param {string} database what database to connect to
+ * @param {string} queryParameters current query parameters
+ * @param {React.Dispatch<React.SetStateAction<JSX.Element>>} setDisplay set what RFHost will display
+ */
 function renderLayer(count, database, queryParameters, setDisplay) {
     if(count < 5000) {
-        console.log("geoJSON")
         fetch(`http://localhost:8882/get-geoJSON/${database}/${queryParameters}`)
             .then(r => r.json())
-            .then(r => setDisplay(<GeoJSON data={r.response} onEachFeature={hoverGeoJSON} key={"geojson"}/>))
+            .then(r => setDisplay(<GeoJSON data={r.response} onEachFeature={hoverGeoJSON} key={r.query}/>)) //TODO: Don't use key to force an update
     }
     else {
-        console.log("tiles")
-        setDisplay(<TileLayer url={`http://localhost:8882/tiles/${database}/{z}/{x}/{y}.png/${queryParameters}`} key={"tiles"}/>)
+        setDisplay(<TileLayer url={`http://localhost:8882/tiles/${database}/{z}/{x}/{y}.png/${queryParameters}`} key={queryParameters}/>) //TODO: Don't use key to force an update
     }
 }
 
+/**
+ * Determines whether to serve a tile or geojson layer
+ * @param {Object} props 
+ * @returns TileLayer or GeoJSON component
+ */
 const RFHost = (props) => {
 
     const [database] = useState(props.database)
@@ -40,11 +51,9 @@ const RFHost = (props) => {
 
     useEffect(() => {
         response && setCount(response.result)
-        //response && renderLayer(count, database, queryParam, setDisplay)
     }, [response])
 
     useEffect(() => {
-        //response && setCount(response.result)
         response && renderLayer(count, database, queryParam, setDisplay)
     }, [count])
 
@@ -53,7 +62,7 @@ const RFHost = (props) => {
     }, [props.queryParam])
 
     return (
-        <>
+        </** Always return an element, even if empty. And only render the display if the fetch has finished */>
         {response && display}
         </>
     )

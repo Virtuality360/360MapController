@@ -1,25 +1,19 @@
-import { CircleMarker, TileLayer, GeoJSON } from "react-leaflet";
+import { CircleMarker } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 import RFHost from "./RFHost";
 
 import * as datapoints from "../../CONSTANTS/DataPoints"
 
-// TODO : Doc Comments
-const onDP = (feature, layer) => {
-    
-    layer.on({
-        'mouseover': (e) => {
-            //console.log(feature)
-          layer.bindTooltip(`MCC: ${feature.properties.mcc}\nMNC: ${feature.properties.mnc}\nLAC: ${feature.properties.lac}\nCID: ${feature.properties.cid}`).openTooltip();
-        },
-        'mouseout': () => {
-          layer.unbindTooltip().closeTooltip();
-        },
-      });
-}
-
 // TODO : Need to change webpack configuration to enable variable named imports
 // Or could serve them through a web server
+
+/**
+ * Generates a marker cluster group for a json file
+ * @param {string} filename the filename for the json file to load
+ * @param {React.Dispatch<any>} dispatcher allows comminucation with the controller
+ * @param {React.Ref<L.Map>} mapRef map refrence hander
+ * @returns A marker cluster group component
+ */
 async function gen_markers(filename, dispatcher, mapRef) {
     let markers = []
     markers = await fetch(filename)
@@ -48,7 +42,9 @@ async function gen_markers(filename, dispatcher, mapRef) {
                             }
                         }} />
                 );
-            } return(markers) })
+            }
+        return(markers) 
+        })
 
     return (
         <MarkerClusterGroup
@@ -65,7 +61,7 @@ async function gen_markers(filename, dispatcher, mapRef) {
 // Dont rebuild entire overlay array each time
 // only remove/add layers to array
 // Change to switch case
-export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters) {
+export const generate_overlay_layers = async (layers, dispatcher, mapRef, queryParameters) => {
     // JS wierdness, different refrences cuase inequality
     if (layers.toString() === [].toString()) {return []}
 
@@ -77,15 +73,9 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef, queryP
         }
         else if(type === "tiles") {
             overlays.push(<RFHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
-            /*const uri = datapoints.data_points[layer].uri
-            if (numElements >= 5000) {
-                overlays.push(<TileLayer url={uri + queryParameters} key={uri + queryParameters}/>)
-            }*/
-            /*else {
-                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={r.response} onEachFeature={onDP}/>)})
-            }*/
         }
     }
-    //console.log(overlays)
     return overlays
 }
+
+export default generate_overlay_layers

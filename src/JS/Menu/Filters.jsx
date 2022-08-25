@@ -5,11 +5,21 @@ import useFetch from "../CustomHooks/useFetch"
 import DropdownContainer from "./DropdownContainer"
 import DropDownEntry from "./DropdownEntry"
 
-
+function buildQueryParametersFiltersOnly(filters) {
+    let queryParameters = "?"
+    for ( const prop in filters) {
+        if(filters[prop].size === 0) continue
+        queryParameters += Array.from(filters[prop]).map(x => `${prop}=${x}`).join('&')
+    }
+    return queryParameters
+}
 
 const reducer = (state, action) => {
     console.log("Hitting reducer with: ", action)
     let current = state[action.filter]
+    if(action.value === "CLEAR ALL") {
+        return {...state, [action.filter]: new Set([])}
+    }
     if(current.has(action.value)) {
         current.delete(action.value)
         return {...state, [action.filter]: current}
@@ -27,10 +37,14 @@ function Filters(props) {
                             "cid": new Set([]),
                         }
 
-    const { response, loading, error } = useFetch("http://0.0.0.0:8882/filters/gsm_qp")
+    const [database] = useState("gsm_qp")
+    const [filter, setFilter] = useState("")
     const [active, activeDispatcher] = useReducer(reducer, initialState)
+    const { response, loading, error } = useFetch(`http://0.0.0.0:8882/filters/${database}/${filter}`, {}, [filter])
+
 
     useEffect(() => {
+        setFilter(buildQueryParametersFiltersOnly(active))
         props.dispatcher({"type": "activeFilter",
                             "payload": {"filters": active}})
     }, [active])
@@ -45,6 +59,7 @@ function Filters(props) {
         let elements = []
         for(const filter in filters) {
             let options = filters[filter].map(x => <DropDownEntry name={x} key={x} dispatcher={dispatcher} container={filter} isActive={isActive(x, filter)}/>)
+            options.push(<DropDownEntry name={"CLEAR ALL"} key={"CLEAR ALL"} dispatcher={dispatcher} container={filter} isActive={isActive("clear", filter)}/>)
             elements.push(<DropdownContainer name={filter} options={options} key={filter} />)
         }
         return elements
@@ -54,7 +69,7 @@ function Filters(props) {
         <>
         {loading && <span style={{color: "white"}} >Loading Filters...</span>}
         {error && <span>Error</span>}
-        {response && loadFilters(response.result, activeDispatcher)}
+        {!loading && response && loadFilters(response.result, activeDispatcher)}
         </>
     )
 }
