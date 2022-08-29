@@ -64,7 +64,6 @@ const Map = (props) => {
                 const bounds = map.getBounds()
                 const [n,e,s,w] = [bounds.getNorth(), bounds.getEast(), bounds.getSouth(), bounds.getWest()]
                 setBounds([n,s,e,w])    
-                fetch(`http://localhost:8882/count/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => setNumElements(r.result[0][0]))
             }
         })
     }

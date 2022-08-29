@@ -2,7 +2,9 @@ import { CircleMarker, TileLayer, GeoJSON, Popup } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 
 import RFHost from "./RFHost";
+import LiveHost from "./LiveHost";
 import L from 'leaflet';
+// import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 import * as datapoints from "../../CONSTANTS/DataPoints"
 
@@ -78,54 +80,11 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef, queryP
             await gen_markers(datapoints.data_points[layer].uri, dispatcher, mapRef).then((res) => overlays.push(res))
         }
         else if(type === "tiles") {
-            const uri = datapoints.data_points[layer].uri
-            if (numElements >= 5000) {
-                overlays.push(<TileLayer url={uri + queryParameters} key={uri + queryParameters}/>)
-            }
-            else {
-                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={"geoJSON"} onEachFeature={onDP}/>)})
-            }
+            overlays.push(<RFHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
         }
         else if(type === "GeoJSON") {
-
-            fetch(`http://localhost:8882/get-JSON/v360_exif_data/${queryParameters}`).then(r => r.json()).then(r => 
-                {
-                     const geoJSONStyle = (feature) => {return {
-                        color: '#C91C1B',
-                      }}
-
-                      const renderTooltip = (feature) => {
-                            let tooltip = "Latitude: " + feature.geometry.coordinates[0]
-                                        + "\n Longitude: " + feature.geometry.coordinates[1]
-                                        + "\n Altitude: " + feature.geometry.coordinates[2];
-
-                        return tooltip
-                      }
-
-                      const onEachFeature = (feature, layer) => {
-                        const tooltipChildren = renderTooltip(feature);
-                        const popupContent = `<Popup> ${tooltipChildren} </Popup>`
-                        layer.bindPopup(popupContent)
-                      }
-
-                        const pointToLayer = (feature, latlng) => {
-                            return L.circleMarker([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], null);
-                        }
-                      
-
-            overlays.push(
-                <MarkerClusterGroup
-                    spiderfyDistanceMultiplier={1}
-                    showCoverageOnHover={false}
-                    maxClusterRadius={20}
-                    disableClusteringAtZoom={15}
-                    spiderfyOnMaxZoom={false}
-                    key={`MarkerClusterGroup-GeoJSON`}>
-                        <GeoJSON data={r.response} key={"geoJSON"} style={geoJSONStyle} onEachFeature={onEachFeature} pointToLayer={pointToLayer}/>
-                </MarkerClusterGroup>
-                )})
+            overlays.push(<LiveHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
         }
     }
-    console.log(overlays)
     return overlays
 }
