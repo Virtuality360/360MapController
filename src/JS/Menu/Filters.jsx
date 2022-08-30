@@ -26,9 +26,13 @@ function Filters(props) {
                             "lac": new Set([]),
                             "cid": new Set([]),
                         }
+    const initialState2 = {"country": new Set([]),
+                            "city": new Set([]),
+                            "project": new Set([]),
+                        }
 
-    const { response, loading, error } = useFetch("http://0.0.0.0:8882/filters/gsm_qp")
-    const [active, activeDispatcher] = useReducer(reducer, initialState)
+    const { response, loading, error } = useFetch("http://0.0.0.0:8882/filters2/v360_exif_data")
+    const [active, activeDispatcher] = useReducer(reducer, initialState2)
 
     useEffect(() => {
         props.dispatcher({"type": "activeFilter",

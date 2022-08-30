@@ -123,7 +123,7 @@ const LiveHost = (props) => {
 
     const [database] = useState(props.database)
     const [queryParam, setQueryParam] = useState(props.queryParam)
-    // const [count, setCount] = useState(Number.MAX_VALUE)
+    const [count, setCount] = useState(Number.MAX_VALUE)
     const [display, setDisplay] = useState(<></>)
     // const { response, error, loading } = useFetch(`http://localhost:8882/count2/${database}/${queryParam}`, {}, [queryParam])
 
@@ -134,7 +134,7 @@ const LiveHost = (props) => {
 
     useEffect(() => {
         renderLayer(database, queryParam, setDisplay);
-    }, [queryParam])
+    })
 
     useEffect(() => {
         setQueryParam(props.queryParam);

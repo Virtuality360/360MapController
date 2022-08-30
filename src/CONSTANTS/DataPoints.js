@@ -16,4 +16,4 @@ export const data_points = {
                     "database": "v360_exif_data"},
 }
 
-export const filterable = ["GSM Radio Frequencies"]
+export const filterable = ["PANO TEST"]

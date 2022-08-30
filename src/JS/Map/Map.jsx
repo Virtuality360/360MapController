@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, LayerGroup, useMapEvents, GeoJSON } from "react-leaflet";
 import React, { useEffect, useState } from "react";
 import L from "leaflet"
 
@@ -27,15 +27,13 @@ function buildQueryParameters(bounds, filters = {}) {
     if(bounds) {
         queryParameters = `?north=${bounds[0]}&south=${bounds[1]}&east=${bounds[2]}&west=${bounds[3]}`
     }
-    // for ( const prop in filters) {
-    //     if(filters[prop].size === 0) continue
-    //     queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
-    // }
+    for ( const prop in filters) {
+        if(filters[prop].size === 0) continue
+        queryParameters += Array.from(filters[prop]).map(x => `&${prop}=${x}`).join('')
+    }
 
     return queryParameters
 }
-
-
 
 
 /**
@@ -50,13 +48,9 @@ const Map = (props) => {
     const [overlayLayers, setOverLayLayers] = useState([])              /** Can have multiple overlays */
     const [center, setCenter] = useState(props.state.center)
     const [zoom, setZoom] = useState(props.state.zoom)
-    const [loading, setLoading] = useState(false)
-    const [numElements, setNumElements] = useState(Number.MAX_VALUE)
 
-    const [bounds, setBounds] = useState([])
+    const [bounds, setBounds] = useState([90,-90,180,-180])
     const [queryParameters, setQueryParameters] = useState("")
-
-    
 
     function MapEventLayer() {
         const map = useMapEvents({
@@ -67,8 +61,6 @@ const Map = (props) => {
             }
         })
     }
-
-
 
     // Enables Changing of the Basemap Style
     useEffect(() => {
@@ -83,15 +75,16 @@ const Map = (props) => {
     useEffect(() => {
         setMapRef(mapRef)
         let canceled = false
-        setLoading(true)
-        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters, numElements).then(result => {
+        //setLoading(true)
+        Layers.generate_overlay_layers(props.state.overlays, props.dispatcher, mapRef, queryParameters).then(result => {
                                                                                                         if (!canceled) {
                                                                                                             setOverLayLayers(result)
-                                                                                                            setLoading(false)
+                                                                                                            //setLoading(false)
                                                                                                         }
                                                                                                         })
+        //console.log("layers updated")
         return () => (canceled = true)
-    }, [props.state.overlays, mapRef, props.dispatcher, props.filters, numElements])
+    }, [props.state.overlays, mapRef, props.dispatcher, props.filters, queryParameters])
     
     return (
         <MapContainer center={center} zoom={zoom} className="map-container" ref={setMapRef} >
