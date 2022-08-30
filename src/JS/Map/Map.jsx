@@ -105,7 +105,7 @@ const Map = (props) => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url={mapStyles.map_tiles[tileLayer].url}
             />
-            <LayerGroup key={overlayLayers} /** TODO: Bad practice to have key force an update */>
+            <LayerGroup key={"LayerGroup"}>
                 {overlayLayers}         
             </LayerGroup>
         </MapContainer>

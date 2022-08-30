@@ -46,6 +46,8 @@ const reducer = (state, action) => {
                         "mapState": {...state.mapState, "center": action.center, "zoom": action.zoom,},
                         "menuState": {...state.menuState, "menuItems": [...state.menuState.menuItems, ...initialState.panoButton]},
                         }
+                default:
+                    return state
             }
             
         case "movePano":

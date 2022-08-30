@@ -24,6 +24,8 @@ function layoutParser(state, dispatcher) {
             case "button":
                 layoutArr.push(<button className="button menuitem" onClick={() => (dispatcher({"type": "toParent", "payload": {"type": "changeDisplay", "newState": "map"}})) } key={entry.name}>{entry.name}</button>)
                 break
+            default:
+                layoutArr.push(<></>)
         }
     }
 
