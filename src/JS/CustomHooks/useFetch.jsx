@@ -10,7 +10,7 @@ import React, { useState, useEffect } from "react"
  * @param {*} options An object containing any custom settings that you want to apply to the request
  * @returns the response, error state, and loading state
  */
-const useFetch = (url, options, dependencies) => {
+const useFetch = (url, options = {}, dependencies = []) => {
 
     const [response, setResponse] = useState(null)
     const [error, setError] = useState(null)
@@ -48,7 +48,7 @@ const useFetch = (url, options, dependencies) => {
         return () => {
             abortController.abort()
         }
-    }, [dependencies])
+    }, dependencies)
 
     return { response, error, loading }
   }

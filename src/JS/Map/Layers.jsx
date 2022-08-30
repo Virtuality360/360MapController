@@ -1,5 +1,6 @@
 import { CircleMarker, TileLayer, GeoJSON, Popup } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
+import RFHost from "./RFHost";
 
 import RFHost from "./RFHost";
 import LiveHost from "./LiveHost";
@@ -13,7 +14,7 @@ const onDP = (feature, layer) => {
     
     layer.on({
         'mouseover': (e) => {
-            console.log(feature)
+            //console.log(feature)
           layer.bindTooltip(`MCC: ${feature.properties.mcc}\nMNC: ${feature.properties.mnc}\nLAC: ${feature.properties.lac}\nCID: ${feature.properties.cid}`).openTooltip();
         },
         'mouseout': () => {
@@ -69,7 +70,7 @@ async function gen_markers(filename, dispatcher, mapRef) {
 // Dont rebuild entire overlay array each time
 // only remove/add layers to array
 // Change to switch case
-export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters, numElements) {
+export async function generate_overlay_layers(layers, dispatcher, mapRef, queryParameters) {
     // JS wierdness, different refrences cuase inequality
     if (layers.toString() === [].toString()) {return []}
 

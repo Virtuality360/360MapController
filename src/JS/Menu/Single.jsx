@@ -19,7 +19,7 @@ function Single(props) {
     }, [singleState])
 
     let options = props.children.map(name => <li key={name}>
-        <DropDownEntry name={name} container={props.name} isActive={props.active.has(name)} dispatcher={singleStateDispatcher}/>
+        <DropDownEntry name={name} container={props.name} isActive={props.active.has(name)} dispatcher={singleStateDispatcher} key={name}/>
     </li>)
 
     return(

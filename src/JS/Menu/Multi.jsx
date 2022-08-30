@@ -27,7 +27,7 @@ function Multi(props) {
     }, [multiState])
 
     let options = props.children.map(x => <li key={x}>
-        <DropDownEntry name={x} container={props.name} dispatcher={multiStateDispatcher}/>
+        <DropDownEntry name={x} container={props.name} dispatcher={multiStateDispatcher} key={x}/>
     </li>)
 
     return(
