@@ -1,6 +1,11 @@
-import { CircleMarker, TileLayer, GeoJSON } from "react-leaflet";
+import { CircleMarker, TileLayer, GeoJSON, Popup } from "react-leaflet";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 import RFHost from "./RFHost";
+
+import RFHost from "./RFHost";
+import LiveHost from "./LiveHost";
+import L from 'leaflet';
+// import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 import * as datapoints from "../../CONSTANTS/DataPoints"
 
@@ -77,15 +82,10 @@ export async function generate_overlay_layers(layers, dispatcher, mapRef, queryP
         }
         else if(type === "tiles") {
             overlays.push(<RFHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
-            /*const uri = datapoints.data_points[layer].uri
-            if (numElements >= 5000) {
-                overlays.push(<TileLayer url={uri + queryParameters} key={uri + queryParameters}/>)
-            }*/
-            /*else {
-                fetch(`http://localhost:8882/get-geoJSON/gsm_qp/${queryParameters}`).then(r => r.json()).then(r => {overlays.push(<GeoJSON data={r.response} key={r.response} onEachFeature={onDP}/>)})
-            }*/
+        }
+        else if(type === "GeoJSON") {
+            overlays.push(<LiveHost database={datapoints.data_points[layer].database} queryParam={queryParameters} key={layer}/>)
         }
     }
-    //console.log(overlays)
     return overlays
 }

@@ -36,8 +36,6 @@ function buildQueryParameters(bounds, filters = {}) {
 }
 
 
-
-
 /**
  * Displays the leaflet map
  * @param {*} props 

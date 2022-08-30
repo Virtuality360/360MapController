@@ -24,8 +24,8 @@ export const initialState = {
     "displayState": "map",
     "mapState": {
         "center": [0,0],
-        "zoom": 0,
-        "style": "Open Street Map",
+        "zoom": 2,
+        "style": "CartoDB Dark matter",
         "overlays": [],
         "mapRef": null,
     },
@@ -42,6 +42,6 @@ export const initialState = {
     },
     "menuState": {
         "menuItems": MenuItems,
-        "active": {"Map": new Set(["Open Street Map"]), "DataPoints": new Set([]) }
+        "active": {"Map": new Set(["CartoDB Dark matter"]), "DataPoints": new Set([]) }
     },
 }
