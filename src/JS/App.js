@@ -7,6 +7,9 @@ import logo from '../logo.svg';
 import '../CSS/App.css';
 import "../CSS/360MapController.css";
 
+import WebGLCanvasVR from "./WebGL/WebGLCanvas.jsx";
+import PanoSphere from "./WebGL/PanoSphere"
+
 const MapPanoController = () => {
     //loads the map
     const [currentComponent, setCurrentComponent] = useState("Map");
@@ -28,14 +31,19 @@ const MapPanoController = () => {
         setCurrentComponent(currentComponent);
     }
 
+    const sphere = <PanoSphere/>
+
     return (
         <div className="pnlm-wrapper App-Container"> 
             <div key={currentComponent} className="pnlm Virtuality360-container">
                 {/** Display the current component, if currentComponent is null, display the map */}
-
+                
                 {{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent} zoom={zoomLevel} latLong={latLong}/>,
-                'PanoViewer': <ControllerButton latLong={latLong} toggleMap={switchComponent} zoom={zoomLevel}/>
+                'PanoViewer': <WebGLCanvasVR shapes={<PanoSphere image={latLong} />}/>
                 }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>}
+                {/*{'Map': <MapComp style ={mapStyle} toggleMap={switchComponent} zoom={zoomLevel} latLong={latLong}/>,
+                'PanoViewer': <ControllerButton latLong={latLong} toggleMap={switchComponent} zoom={zoomLevel}/>
+                }[currentComponent] || <MapComp style ={mapStyle} toggleMap={switchComponent}/>*/}
             </div>
 
         </div>
