@@ -31,8 +31,6 @@ const MapPanoController = () => {
         setCurrentComponent(currentComponent);
     }
 
-    const sphere = <PanoSphere/>
-
     return (
         <div className="pnlm-wrapper App-Container"> 
             <div key={currentComponent} className="pnlm Virtuality360-container">

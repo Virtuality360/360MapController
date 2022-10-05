@@ -3,14 +3,16 @@ import { useState } from 'react';
 import * as THREE from 'three'
 
 import JSON from "../../PanoConfigs/demo-output.json";
-
-
+import PanoHotspot from './PanoHotspot';
 
 function PanoSphere(props) {
+    const [image, setImage] = useState(props.image)
+    const colorMap = useLoader(THREE.TextureLoader, `/Images/${image}`)
 
     function getHotspots() {
+        console.log("image", image)
         for(const img of JSON.Images) {
-            if(props.image === img.ImageId) {
+            if(image === img.ImageId) {
                 return img.Hotspots
             }
         }
@@ -21,18 +23,18 @@ function PanoSphere(props) {
         const hotspots = getHotspots()
         let hotspotElements = []
         hotspots.forEach((hotspot) => hotspotElements.push(
-            <mesh position={[0, 0, 0]} key={hotspot.Path}>
-                <sphereGeometry args={[1.25, 32, 32]} />
-                <meshBasicMaterial color="white" />
-            </mesh>
+            <PanoHotspot {...hotspot} key={hotspot.Path} handleClick={handleClick} />
         ))
         hotspotElements.push()
         return hotspotElements
     }
 
-    const colorMap = useLoader(THREE.TextureLoader, `/Images/${props.image}`)
-    const [hotspots, setHotspots] = useState(loadHotspots())
+    const handleClick = (path) => {
+        setImage(path)
+    }
 
+    const hotspots = loadHotspots()
+    
     return(
         <>
         <mesh>
