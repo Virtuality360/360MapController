@@ -23,7 +23,12 @@ function PanoSphere(props) {
           const gamepad = rightController.inputSource.gamepad;
           if (gamepad) {
             if (gamepad.buttons[2].pressed) {
-                if(gamepad.axes[0] > 0.5)
+                //console.log(gamepad.axes)
+                // may cause motion sickness
+                /** gamepad.axes : [left/right,up/down] bounds: [-1,1] registers where finger is on the gamepad when it is depressed */
+                panoRef.current.rotation.y += gamepad.axes[0] * 0.001
+                panoRef.current.rotation.z += gamepad.axes[1] * 0.001
+                /*if(gamepad.axes[0] > 0.5)
                 {
                     //Right
                     console.log("Moved Right! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
@@ -46,7 +51,7 @@ function PanoSphere(props) {
                     //Up
                     console.log("Moved Up! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
                     panoRef.current.rotation.z -= gamepad.axes[1] * .1;
-                }
+                }*/
             }
         }
     }
@@ -78,8 +83,8 @@ function PanoSphere(props) {
         const hotspots = loadHotspots()
     
     return(
-        <mesh ref={panoRef}>
-            <sphereGeometry args={[PANO_SPHERE_RADIUS, 500, 500]}/>
+        <mesh ref={panoRef} rotation={[0,Math.PI/2,0]}>
+            <sphereGeometry args={[PANO_SPHERE_RADIUS, 500, 500]} />
             <meshBasicMaterial map={colorMap} side={THREE.BackSide} />
             {hotspots}
         </mesh>
