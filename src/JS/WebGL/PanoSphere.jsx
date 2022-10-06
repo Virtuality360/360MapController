@@ -4,6 +4,7 @@ import * as THREE from 'three'
 
 import JSON from "../../PanoConfigs/demo-output.json";
 import PanoHotspot from './PanoHotspot';
+import { PANO_SPHERE_RADIUS } from "../../Constants/WebGL"
 
 function PanoSphere(props) {
     const [image, setImage] = useState(props.image)
@@ -38,7 +39,7 @@ function PanoSphere(props) {
     return(
         <>
         <mesh>
-            <sphereGeometry args={[500, 60, 40]} />
+            <sphereGeometry args={[PANO_SPHERE_RADIUS, 500, 500]}/>
             <meshBasicMaterial map={colorMap} side={THREE.BackSide} />
         </mesh>
         {hotspots}
