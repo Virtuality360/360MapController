@@ -1,11 +1,10 @@
-import { useLoader } from '@react-three/fiber'
+import { useLoader,useFrame } from '@react-three/fiber'
 import { useState, useRef } from 'react';
 import * as THREE from 'three'
-
 import JSON from "../../PanoConfigs/demo-output.json";
 import PanoHotspot from './PanoHotspot';
 import { PANO_SPHERE_RADIUS } from "../../Constants/WebGL"
-import { useFrame } from "@react-three/fiber"
+import { useController } from "@react-three/xr";
 
 function PanoSphere(props) {
 
@@ -13,7 +12,44 @@ function PanoSphere(props) {
     const colorMap = useLoader(THREE.TextureLoader, `/Images/${image}`)
     const panoRef = useRef()
 
-    useFrame(() => (panoRef.current.rotation.y += 0.001))
+    const leftController = useController('left');
+    const rightController = useController('right');
+
+    useFrame(() => (move()))
+
+    function move()
+    {
+        if(!rightController) {return} 
+          const gamepad = rightController.inputSource.gamepad;
+          if (gamepad) {
+            if (gamepad.buttons[2].pressed) {
+                if(gamepad.axes[0] > 0.5)
+                {
+                    //Right
+                    console.log("Moved Right! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
+                    panoRef.current.rotation.y += gamepad.axes[0] * .1;
+                }
+                if(gamepad.axes[0] < -0.5)
+                {
+                    //Left
+                    console.log("Moved Left! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
+                    panoRef.current.rotation.y -= gamepad.axes[0] * .1;
+                }
+                if(gamepad.axes[1] > 0.5)
+                {
+                    //Down
+                    console.log("Moved Down! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
+                    panoRef.current.rotation.z += gamepad.axes[1] * .1;
+                }
+                if(gamepad.axes[1] < -0.5)
+                {
+                    //Up
+                    console.log("Moved Up! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
+                    panoRef.current.rotation.z -= gamepad.axes[1] * .1;
+                }
+            }
+        }
+    }
     
     function getHotspots() {
         console.log("image", image)

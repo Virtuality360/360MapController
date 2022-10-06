@@ -9,7 +9,7 @@ function WebGLCanvasVR(props) {
         setShapes(newShapes)
     }
 
-    const [shapes, setShapes] = useState(props.shapes)
+    const [shapes, setShapes] = useState(props.shapes);
 
     return (
         <>
