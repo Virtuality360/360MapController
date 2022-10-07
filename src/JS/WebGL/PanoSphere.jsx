@@ -5,6 +5,7 @@ import JSON from "../../PanoConfigs/demo-output.json";
 import PanoHotspot from './PanoHotspot';
 import { PANO_SPHERE_RADIUS } from "../../Constants/WebGL"
 import { useController } from "@react-three/xr";
+import { useSpring, animated } from "@react-spring/three";
 
 function PanoSphere(props) {
 
@@ -15,10 +16,16 @@ function PanoSphere(props) {
     const leftController = useController('left');
     const rightController = useController('right');
 
+    let active = false;
+
+    const {scale} = useSpring({ scale : active ? 1.5 : 1})
+
     useFrame(() => (move()))
 
     function move()
     {
+
+
         if(!rightController) {return} 
           const gamepad = rightController.inputSource.gamepad;
           if (gamepad) {
@@ -26,32 +33,26 @@ function PanoSphere(props) {
                 //console.log(gamepad.axes)
                 // may cause motion sickness
                 /** gamepad.axes : [left/right,up/down] bounds: [-1,1] registers where finger is on the gamepad when it is depressed */
-                panoRef.current.rotation.y += gamepad.axes[0] * 0.001
-                panoRef.current.rotation.z += gamepad.axes[1] * 0.001
-                /*if(gamepad.axes[0] > 0.5)
+
+                //rotation controls
+                panoRef.current.rotation.y += gamepad.axes[0] * 0.05;
+                //panoRef.current.rotation.z += gamepad.axes[1] * 0.05;
+
+                //zoom controls
+                if(panoRef.current.scale <= 0)
                 {
-                    //Right
-                    console.log("Moved Right! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
-                    panoRef.current.rotation.y += gamepad.axes[0] * .1;
+                   // panoRef.current.scale.set(1,1,1)
                 }
-                if(gamepad.axes[0] < -0.5)
+                else
                 {
-                    //Left
-                    console.log("Moved Left! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
-                    panoRef.current.rotation.y -= gamepad.axes[0] * .1;
+                    if(gamepad.axes[1] >= .5 || gamepad.axes[1] <= -.5)
+                    {
+                        let scale_scalar = Math.abs(gamepad.axes[1])
+                        //panoRef.current.scale.set(1,scale_scalar,scale_scalar)
+
+                        active=!active;
+                     }  
                 }
-                if(gamepad.axes[1] > 0.5)
-                {
-                    //Down
-                    console.log("Moved Down! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
-                    panoRef.current.rotation.z += gamepad.axes[1] * .1;
-                }
-                if(gamepad.axes[1] < -0.5)
-                {
-                    //Up
-                    console.log("Moved Up! " + "\n [" + gamepad.axes[0] + ", " + gamepad.axes[1] + "]");
-                    panoRef.current.rotation.z -= gamepad.axes[1] * .1;
-                }*/
             }
         }
     }
@@ -83,7 +84,7 @@ function PanoSphere(props) {
         const hotspots = loadHotspots()
     
     return(
-        <mesh ref={panoRef} rotation={[0,Math.PI/2,0]}>
+        <mesh ref={panoRef} scale={scale} rotation={[0,Math.PI/2,0]}>
             <sphereGeometry args={[PANO_SPHERE_RADIUS, 500, 500]} />
             <meshBasicMaterial map={colorMap} side={THREE.BackSide} />
             {hotspots}

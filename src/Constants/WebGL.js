@@ -1,1 +1,1 @@
-export const PANO_SPHERE_RADIUS = 500;
+export const PANO_SPHERE_RADIUS = 50;

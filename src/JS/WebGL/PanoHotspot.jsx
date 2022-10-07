@@ -17,7 +17,7 @@ function PanoHotspot(props) {
             <mesh position={coordinates} scale={hovered ? 1.5 : 1} ref={hotspotRef}
                 onClick={()=>{props.handleClick(props.Path)}} onPointerOver={() => {setHovered(true)}} onPointerOut={() => {setHovered(false)}}  >
                 <sphereGeometry args={[15, 32, 32]} />
-                <meshBasicMaterial color={hovered ? 'hotpink' : 'orange'} />
+                <meshBasicMaterial color={hovered ? 'cyan' : 'orange'} />
             </mesh>
     )
 }

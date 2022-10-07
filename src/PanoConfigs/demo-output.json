@@ -8,7 +8,7 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0002.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         }
       ]
@@ -21,12 +21,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0003.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0001.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -39,12 +39,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0004.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0002.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -57,12 +57,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0005.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0003.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -75,12 +75,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0006.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0004.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -93,12 +93,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0007.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0005.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -111,12 +111,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0008.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0006.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -129,12 +129,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0009.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0007.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -147,12 +147,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0010.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0008.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -165,12 +165,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0011.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0009.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -183,12 +183,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0012.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0010.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -201,12 +201,12 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0013.jpg",
-          "Yaw":0,
+          "Yaw":-10,
           "Pitch":-3
         },
         {
           "Path": "aeea344c-0011.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
@@ -219,7 +219,7 @@
       "Hotspots": [
         {
           "Path": "aeea344c-0012.jpg",
-          "Yaw":190,
+          "Yaw":170,
           "Pitch":-3
         }
       ]
