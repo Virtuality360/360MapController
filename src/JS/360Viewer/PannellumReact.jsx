@@ -4,7 +4,7 @@ import { Pannellum } from "@karianpour/pannellum-react";
 import "@karianpour/pannellum-react/es/pannellum/css/video-js.css";
 import "@karianpour/pannellum-react/es/pannellum/css/pannellum.css";
 import "@karianpour/pannellum-react/es/pannellum/css/style-textInfo.css";
-import JSON from "../../PanoConfigs/demo-output.json";
+import JSON from "../../PanoConfigs/ProcessedPanoJSON.json";
 import CustomPannellumHotspot from "./CustomPannellumHotspot";
 
 import "../../CSS/360MapController.css";
