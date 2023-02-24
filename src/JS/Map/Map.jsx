@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, CircleMarker, useMap, ZoomControl, LayersControl} from "react-leaflet";
-import Images from "../../PanoConfigs/demo-output.json";
+import Images from "../../PanoConfigs/ProcessedPanoJSON.json";
 import MarkerClusterGroup from "@changey/react-leaflet-markercluster";
 
 import MenuBar from "../Menu/MenuBar.jsx";
